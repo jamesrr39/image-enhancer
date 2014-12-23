@@ -18,18 +18,19 @@ import org.kohsuke.args4j.CmdLineParser;
 
 /**
  * Entry point for the command-line app
+ *
  * @author james
  */
 public class ImageEnhancer {
 
 	private static List<Image> images;
-	
+
 	public static void main(String[] args) throws IOException, CmdLineException {
-		
+
 		AppArgs appArgs = new AppArgs();
 		CmdLineParser parser = new CmdLineParser(appArgs);
 		parser.parseArgument(args);
-		
+
 		images = ImmutableList.copyOf(ImageEnhancerHelper.getImagesFromPaths(appArgs.getImagePaths()));
 
 		if (images.isEmpty()) {

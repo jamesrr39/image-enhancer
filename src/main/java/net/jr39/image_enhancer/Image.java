@@ -22,42 +22,42 @@ import net.jr39.image_enhancer.graphics.transformations.AbstractTransformationAr
  */
 public class Image {
 
-		private final String filePath;
-		private final List<BufferedImage> imageStages = new ArrayList<>();
+	private final String filePath;
+	private final List<BufferedImage> imageStages = new ArrayList<>();
 
-		public Image(String filePath) throws IOException {
-				this.filePath = filePath;
-				this.imageStages.add(ImageIO.read(new File(filePath)));
-		}
-		
-		public int getNumberOfStages(){
-				return this.imageStages.size();
-		}
+	public Image(String filePath) throws IOException {
+		this.filePath = filePath;
+		this.imageStages.add(ImageIO.read(new File(filePath)));
+	}
 
-		public BufferedImage getImageAtStage(int stage) {
-				return imageStages.get(stage);
-		}
-		
-		public List<BufferedImage> getImageStages(){
-				return this.imageStages;
-		}
+	public int getNumberOfStages() {
+		return this.imageStages.size();
+	}
 
-		public String getFilePath() {
-				return filePath;
-		}
+	public BufferedImage getImageAtStage(int stage) {
+		return imageStages.get(stage);
+	}
 
-		public BufferedImage getLatestImage() {
-				return imageStages.get(imageStages.size() - 1);
-		}
+	public List<BufferedImage> getImageStages() {
+		return this.imageStages;
+	}
 
-		public BufferedImage performTransformation(AbstractTransformation transformation) {
-				return performTransformation(transformation, imageStages.size() - 1);
-		}
-		
-		public BufferedImage performTransformation(AbstractTransformation transformation, int fromImageAtStage) {
-				BufferedImage transformedImage = transformation.transform(imageStages.get(fromImageAtStage));
-				imageStages.add(transformedImage);
-				return transformedImage;
-		}
-		
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public BufferedImage getLatestImage() {
+		return imageStages.get(imageStages.size() - 1);
+	}
+
+	public BufferedImage performTransformation(AbstractTransformation transformation) {
+		return performTransformation(transformation, imageStages.size() - 1);
+	}
+
+	public BufferedImage performTransformation(AbstractTransformation transformation, int fromImageAtStage) {
+		BufferedImage transformedImage = transformation.transform(imageStages.get(fromImageAtStage));
+		imageStages.add(transformedImage);
+		return transformedImage;
+	}
+
 }
