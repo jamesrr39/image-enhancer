@@ -19,7 +19,7 @@ public class ImageEnhancerHelper {
 			try {
 				images.add(new Image(path));
 			} catch (IOException ex) {
-				Logger.getLogger(ImageEnhancer.class.getName()).log(Level.SEVERE, "Couldn't load image: '{0}'", path);
+				Logger.getLogger(ImageEnhancerHelper.class.getName()).log(Level.SEVERE, "Couldn't load image: '{0}'", path);
 			}
 		});
 		return images;
