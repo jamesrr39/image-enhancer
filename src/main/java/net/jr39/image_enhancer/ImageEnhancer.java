@@ -1,5 +1,6 @@
 package net.jr39.image_enhancer;
 
+import com.google.common.collect.ImmutableList;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
@@ -12,6 +13,8 @@ import javax.imageio.ImageIO;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformation;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformationArgs;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 
 /**
  * Entry point for the command-line app
@@ -19,21 +22,15 @@ import net.jr39.image_enhancer.graphics.transformations.BrightenTransformationAr
  */
 public class ImageEnhancer {
 
-	private static final List<Image> images = new ArrayList<>();
-
-	public static void main(String[] args) throws IOException {
-		final String imagePathArgKey = "--image=";
-		java.util.Arrays.asList(args)
-				.stream()
-				.filter(arg -> arg.trim().indexOf(imagePathArgKey) == 0)
-				.map(arg -> arg.substring(imagePathArgKey.length()))
-				.forEach((String imagePath) -> {
-					try {
-						images.add(new Image(imagePath));
-					} catch (IOException ex) {
-						Logger.getLogger(ImageEnhancer.class.getName()).log(Level.SEVERE, "Couldn't load image: '" + imagePath + "'", ex);
-					}
-				});
+	private static List<Image> images;
+	
+	public static void main(String[] args) throws IOException, CmdLineException {
+		
+		AppArgs appArgs = new AppArgs();
+		CmdLineParser parser = new CmdLineParser(appArgs);
+		parser.parseArgument(args);
+		
+		images = ImmutableList.copyOf(ImageEnhancerHelper.getImagesFromPaths(appArgs.getImagePaths()));
 
 		if (images.isEmpty()) {
 			Logger.getLogger(ImageEnhancer.class.getName()).log(Level.WARNING, "No images loaded, specify image(s) with '--image=' argument(s)");
