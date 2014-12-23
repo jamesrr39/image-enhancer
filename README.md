@@ -9,4 +9,6 @@ Build:
     mvn install
 
 Options:
-(tbd)
+
+    -image=[filepath]
+    Filepath to the image to be transformed. Pass this argument multiple times if required
