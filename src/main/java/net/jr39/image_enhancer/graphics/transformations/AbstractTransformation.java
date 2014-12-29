@@ -28,7 +28,7 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	public BufferedImage transform(BufferedImage image) {
 		if (this.transformationArgs.getUpperLeftPoint() == null) {
 			// full image transformation
-			return transform(image);
+			return performTransformation(image);
 		} else {
 			final Graphics g = image.getGraphics();
 			final Point point = transformationArgs.getUpperLeftPoint();

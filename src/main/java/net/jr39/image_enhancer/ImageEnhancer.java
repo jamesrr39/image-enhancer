@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ import org.kohsuke.args4j.CmdLineParser;
 public class ImageEnhancer {
 
 	private static List<Image> images;
+	private static final Logger logger = Logger.getLogger(ImageEnhancer.class.getName());
 
 	public static void main(String[] args) throws IOException, CmdLineException {
 
@@ -34,7 +36,7 @@ public class ImageEnhancer {
 		images = ImmutableList.copyOf(ImageEnhancerHelper.getImagesFromPaths(appArgs.getImagePaths()));
 
 		if (images.isEmpty()) {
-			Logger.getLogger(ImageEnhancer.class.getName()).log(Level.WARNING, "No images loaded, specify image(s) with '--image=' argument(s)");
+			logger.log(Level.WARNING, "No images loaded, specify image(s) with '--image=' argument(s)");
 		}
 
 		images.parallelStream().forEach((Image image) -> {
@@ -44,9 +46,11 @@ public class ImageEnhancer {
 			String processedImageFilePath = null;
 			File f;
 
-			// mock (todo)
-			BrightenTransformationArgs transformationArgs = new BrightenTransformationArgs(2, new Point(1000, 1000), new Rectangle(400, 400));
-			AbstractTransformation chosenTransformation = new BrightenTransformation(transformationArgs);
+			AbstractTransformation chosenTransformation = ImageEnhancerHelper.getTransformationType(appArgs.getTransformationType(), appArgs.getTransformationArgs());			
+			logger.log(Level.INFO, "performing '{0}' with args: '{1}'", new Object[]{
+				chosenTransformation.getClass().getName(), 
+				Arrays.toString(appArgs.getTransformationArgs())
+			});
 			image.performTransformation(chosenTransformation);
 
 			// find a new filename to save this as
@@ -62,9 +66,9 @@ public class ImageEnhancer {
 
 			try {
 				ImageIO.write(image.getLatestImage(), imageFormat, new File(processedImageFilePath));
-				Logger.getLogger(ImageEnhancer.class.getName()).log(Level.INFO, "Saved transformed image at: ''{0}''", processedImageFilePath);
+				logger.log(Level.INFO, "Saved transformed image at: ''{0}''", processedImageFilePath);
 			} catch (IOException ex) {
-				Logger.getLogger(ImageEnhancer.class.getName()).log(Level.SEVERE, "Couldn't save image: '" + processedImageFilePath + "'", ex);
+				logger.log(Level.SEVERE, "Couldn't save image: '" + processedImageFilePath + "'", ex);
 			}
 
 		});

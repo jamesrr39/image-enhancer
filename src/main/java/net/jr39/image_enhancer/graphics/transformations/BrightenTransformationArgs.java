@@ -22,7 +22,7 @@ public class BrightenTransformationArgs extends AbstractTransformationArgs {
 	public BrightenTransformationArgs(float scaleFactor) {
 		this.scaleFactor = scaleFactor;
 	}
-
+	
 	/**
 	 *
 	 * @param scaleFactor brightness multiplier. Between 1f and 1.5f
