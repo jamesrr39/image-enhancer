@@ -1,9 +1,9 @@
 package net.jr39.image_enhancer;
 
+import com.google.common.collect.ImmutableList;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.util.List;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformationArgs;
@@ -26,7 +26,11 @@ public class AppArgs {
 	private static final Logger LOGGER = Logger.getLogger(AppArgs.class);
 	
 	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths")
-	private List<String> imagePaths = new ArrayList<>();
+	public void setImages(List<String> imagePaths){
+		images = ImageEnhancerHelper.getImagesFromPaths(imagePaths);
+	}
+	
+	private List<Image> images;
 
 	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type")
 	public void setTransformationType(String transformationType) {
@@ -93,8 +97,8 @@ public class AppArgs {
 		}
 	}
 
-	public List<String> getImagePaths() {
-		return imagePaths;
+	public List<Image> getImages() {
+		return ImmutableList.copyOf(images);
 	}
 
 }

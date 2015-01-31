@@ -31,7 +31,7 @@ public class ImageEnhancer {
 		CmdLineParser parser = new CmdLineParser(appArgs);
 		parser.parseArgument(args);
 
-		images = ImmutableList.copyOf(ImageEnhancerHelper.getImagesFromPaths(appArgs.getImagePaths()));
+		images = appArgs.getImages();
 
 		if (images.isEmpty()) {
 			logger.log(Level.WARNING, "No images loaded, specify image(s) with '-image=' argument(s)");
