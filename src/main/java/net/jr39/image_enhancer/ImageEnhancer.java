@@ -27,18 +27,10 @@ public class ImageEnhancer {
 
 	public static void main(String[] args) throws IOException, CmdLineException {
 		
-		logger.log(Level.INFO, "arguments: {0}", Arrays.toString(args));
-		Map<String, Object> map = new HashMap<>();
-		map.put("upperLeftPoint", new Point(2,3));
-		map.put("upperLeftPoint2", new Point(2,3));
-		logger.log(Level.INFO, "map str{0}", map);
-
 		AppArgs appArgs = new AppArgs();
 		CmdLineParser parser = new CmdLineParser(appArgs);
 		parser.parseArgument(args);
 
-		logger.log(Level.INFO, "upper left point: {0}", appArgs.getTransformationShapeArgs());
-		
 		images = ImmutableList.copyOf(ImageEnhancerHelper.getImagesFromPaths(appArgs.getImagePaths()));
 
 		if (images.isEmpty()) {
@@ -53,9 +45,9 @@ public class ImageEnhancer {
 			File f;
 
 			AbstractTransformation chosenTransformation = appArgs.getTransformationType();
-			logger.log(Level.INFO, "performing {0} with args: {1}, and shape args: {2}", new Object[]{
+			logger.log(Level.INFO, "performing {0} on pixels: {1}, and shape args: {2}", new Object[]{
 				chosenTransformation.getClass().getName(),
-				appArgs.getTransformationArgs(),
+				appArgs.getTransformationArgs().getShapeArgs().getPixelsToBeTransformed(),
 				appArgs.getTransformationShape()
 			});
 			image.performTransformation(chosenTransformation);

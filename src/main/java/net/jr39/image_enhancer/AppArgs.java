@@ -1,5 +1,6 @@
 package net.jr39.image_enhancer;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -63,8 +64,8 @@ public class AppArgs {
 				String[] upperLeftPointArg = transformationShapeArgs.get(0).split(",");
 				String[] dimensionsArg = transformationShapeArgs.get(1).split(",");
 				Point upperLeftPoint = new Point(Integer.parseInt(upperLeftPointArg[0]), Integer.parseInt(upperLeftPointArg[1]));
-				Rectangle dimensions = new Rectangle(Integer.parseInt(dimensionsArg[0]), Integer.parseInt(dimensionsArg[1]));
-				return new RectangleArgs(upperLeftPoint, dimensions);
+				Dimension dimensions = new Dimension(Integer.parseInt(dimensionsArg[0]), Integer.parseInt(dimensionsArg[1]));
+				return new RectangleArgs(new Rectangle(upperLeftPoint, dimensions));
 			default:
 				if (this.getTransformationShape() == null) {
 					return null;
@@ -77,7 +78,7 @@ public class AppArgs {
 	public AbstractTransformationArgs getTransformationArgs() {
 		switch (transformationType) {
 			case BRIGHTEN:
-				return new BrightenTransformationArgs(Float.parseFloat(transformationArgs[0]));
+				return new BrightenTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}

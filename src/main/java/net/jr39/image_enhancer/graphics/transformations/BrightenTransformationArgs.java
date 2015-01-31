@@ -16,12 +16,9 @@ public class BrightenTransformationArgs extends AbstractTransformationArgs {
 
 	/**
 	 *
-	 * @param scaleFactor brightness multiplier. Between 1f and 1.5f
+	 * @param shapeArgs
+	 * @param transformationArgs 1st index brightness multiplier. Between 1f and 1.5f
 	 */
-	public BrightenTransformationArgs(float scaleFactor) {
-		this.scaleFactor = scaleFactor;
-	}
-	
 	public BrightenTransformationArgs(IShapeArgs shapeArgs, String[] transformationArgs){
 		this(shapeArgs, Float.parseFloat(transformationArgs[0]));
 	}
