@@ -1,7 +1,6 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
-import java.awt.Point;
-import java.awt.Rectangle;
+import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 
 /**
  *
@@ -23,14 +22,18 @@ public class BrightenTransformationArgs extends AbstractTransformationArgs {
 		this.scaleFactor = scaleFactor;
 	}
 	
+	public BrightenTransformationArgs(IShapeArgs shapeArgs, String[] transformationArgs){
+		this(shapeArgs, Float.parseFloat(transformationArgs[0]));
+	}
+	
+	
 	/**
 	 *
 	 * @param scaleFactor brightness multiplier. Between 1f and 1.5f
-	 * @param upperLeftPoint upper left point of the transform
-	 * @param transformationRectangle dimensions of the rectangle to be transformed
+	 * @param shapeArgs
 	 */
-	public BrightenTransformationArgs(float scaleFactor, Point upperLeftPoint, Rectangle transformationRectangle) {
-		super(upperLeftPoint, transformationRectangle);
+	public BrightenTransformationArgs(IShapeArgs shapeArgs, float scaleFactor) {
+		super(shapeArgs);
 		this.scaleFactor = scaleFactor;
 	}
 

@@ -12,3 +12,7 @@ Options:
 
     -image=[filepath]
     Filepath to the image to be transformed. Pass this argument multiple times if required
+
+Example Args:
+
+    -image=/home/user/Pictures/myimage.jpg -tt=brighten -ta=1.2 -ts=rectangle -tsa 200,250 0,400

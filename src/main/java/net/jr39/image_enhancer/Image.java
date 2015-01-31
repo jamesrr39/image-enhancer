@@ -5,8 +5,6 @@
  */
 package net.jr39.image_enhancer;
 
-import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
-import net.jr39.image_enhancer.graphics.transformations.AbstractTransformationArgs;
 
 /**
  *

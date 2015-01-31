@@ -2,18 +2,16 @@ package net.jr39.image_enhancer;
 
 import com.google.common.collect.ImmutableList;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
-import net.jr39.image_enhancer.graphics.transformations.BrightenTransformation;
-import net.jr39.image_enhancer.graphics.transformations.BrightenTransformationArgs;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -28,15 +26,23 @@ public class ImageEnhancer {
 	private static final Logger logger = Logger.getLogger(ImageEnhancer.class.getName());
 
 	public static void main(String[] args) throws IOException, CmdLineException {
+		
+		logger.log(Level.INFO, "arguments: {0}", Arrays.toString(args));
+		Map<String, Object> map = new HashMap<>();
+		map.put("upperLeftPoint", new Point(2,3));
+		map.put("upperLeftPoint2", new Point(2,3));
+		logger.log(Level.INFO, "map str{0}", map);
 
 		AppArgs appArgs = new AppArgs();
 		CmdLineParser parser = new CmdLineParser(appArgs);
 		parser.parseArgument(args);
 
+		logger.log(Level.INFO, "upper left point: {0}", appArgs.getTransformationShapeArgs());
+		
 		images = ImmutableList.copyOf(ImageEnhancerHelper.getImagesFromPaths(appArgs.getImagePaths()));
 
 		if (images.isEmpty()) {
-			logger.log(Level.WARNING, "No images loaded, specify image(s) with '--image=' argument(s)");
+			logger.log(Level.WARNING, "No images loaded, specify image(s) with '-image=' argument(s)");
 		}
 
 		images.parallelStream().forEach((Image image) -> {
@@ -46,10 +52,11 @@ public class ImageEnhancer {
 			String processedImageFilePath = null;
 			File f;
 
-			AbstractTransformation chosenTransformation = ImageEnhancerHelper.getTransformationType(appArgs.getTransformationType(), appArgs.getTransformationArgs());			
-			logger.log(Level.INFO, "performing '{0}' with args: '{1}'", new Object[]{
-				chosenTransformation.getClass().getName(), 
-				Arrays.toString(appArgs.getTransformationArgs())
+			AbstractTransformation chosenTransformation = appArgs.getTransformationType();
+			logger.log(Level.INFO, "performing {0} with args: {1}, and shape args: {2}", new Object[]{
+				chosenTransformation.getClass().getName(),
+				appArgs.getTransformationArgs(),
+				appArgs.getTransformationShape()
 			});
 			image.performTransformation(chosenTransformation);
 
