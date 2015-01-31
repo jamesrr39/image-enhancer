@@ -1,10 +1,9 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
-import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.logging.Level;
+import java.util.List;
+import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 
 /**
  *
@@ -12,7 +11,7 @@ import java.util.logging.Level;
  * @param <T>
  */
 public abstract class AbstractTransformation<T extends AbstractTransformationArgs> {
-
+	
 	protected final T transformationArgs;
 
 	public AbstractTransformation(T transformationArgs) {
@@ -26,17 +25,34 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	 * @return
 	 */
 	public BufferedImage transform(BufferedImage image) {
-		if (this.transformationArgs.getUpperLeftPoint() == null) {
+//		
+//		// mock
+//		Point[] pixels = new Point[(image.getWidth() - 201) * image.getHeight()];
+//		int c=0;
+//		for(int y = 0; y < image.getHeight(); y++){
+//			for(int x = 0; x < image.getWidth(); x++){
+//				if(x > 200){
+//					pixels[c] = new Point(x, y);
+//					c++;
+//				}
+//			}
+//		}
+//		
+//		final List<Point> pixelsToBeTransformed = ImmutableList.of(pixels);
+		
+		if (this.transformationArgs.getShapeArgs() == null) {
 			// full image transformation
 			return performTransformation(image);
 		} else {
-			final Graphics g = image.getGraphics();
-			final Point point = transformationArgs.getUpperLeftPoint();
-			final Rectangle rectangle = transformationArgs.getTransformationRectangle();
-			BufferedImage subImage = image.getSubimage((int) point.getX(), (int) point.getY(), (int) rectangle.getWidth(), (int) rectangle.getHeight());
-			subImage = performTransformation(subImage);
-			g.drawImage(subImage, (int) point.getX(), (int) point.getY(), null);
-			return image;
+			return performTransformation(image, transformationArgs.getShapeArgs().getPixelsToBeTransformed());
+			
+//			final Graphics g = image.getGraphics();
+//			final Point point = transformationArgs.getUpperLeftPoint();
+//			final Rectangle rectangle = transformationArgs.getTransformationRectangle();
+//			BufferedImage subImage = image.getSubimage((int) point.getX(), (int) point.getY(), (int) rectangle.getWidth(), (int) rectangle.getHeight());
+//			subImage = performTransformation(subImage);
+//			g.drawImage(subImage, (int) point.getX(), (int) point.getY(), null);
+//			return image;
 		}
 	}
 
@@ -47,5 +63,7 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	 * @return transformed image
 	 */
 	protected abstract BufferedImage performTransformation(BufferedImage image);
+	
+	protected abstract BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed);
 
 }

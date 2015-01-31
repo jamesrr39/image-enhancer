@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
-import net.jr39.image_enhancer.graphics.transformations.AbstractTransformationArgs;
-import net.jr39.image_enhancer.graphics.transformations.BrightenTransformation;
-import net.jr39.image_enhancer.graphics.transformations.BrightenTransformationArgs;
 
 /**
  *
@@ -27,15 +23,6 @@ public class ImageEnhancerHelper {
 			}
 		});
 		return images;
-	}
-	
-	public static AbstractTransformation getTransformationType(String transformationType, String[] args){
-		switch(transformationType){
-			case "brightnessTransformation":
-				return new BrightenTransformation(new BrightenTransformationArgs(Float.parseFloat(args[0])));
-			default:
-				throw new IllegalArgumentException("Couldn't recognise the transformation type '" + transformationType + "'");
-		}
 	}
 	
 }

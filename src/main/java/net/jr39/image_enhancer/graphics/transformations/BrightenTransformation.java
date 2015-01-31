@@ -1,7 +1,10 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import java.awt.image.WritableRaster;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,4 +37,17 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 		logger.log(Level.INFO, "finished brighten transformation in {0}ms", (System.currentTimeMillis() - startTime));
 		return op.filter(image, null);
 	}
+
+	@Override
+	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed) {
+		// todo new int[4]
+		WritableRaster wr = image.getRaster();
+		logger.log(Level.INFO, "raster bounds: {0}", new Object[]{
+			wr.getBounds()
+		});
+		pixelsToBeTransformed
+				.stream()
+				.forEach((point) -> wr.setPixel((int)point.getX(), (int)point.getY(), new int[4]));
+		return image;
+	}	
 }
