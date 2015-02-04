@@ -25,10 +25,19 @@ public class AppArgs {
 
 	private static final Logger LOGGER = Logger.getLogger(AppArgs.class);
 	
+	@Option(name = "-transformation-shape-args", aliases = {"-tsa"}, usage = "transformation shape args", metaVar = "-tsa 0,10 200,300", handler = StringArrayOptionHandler.class, depends = "-transformation-shape")
+	private List<String> transformationShapeArgs;
+
+	@Option(name = "-transformation-shape", aliases = {"-ts"}, usage = "transformation shape")
+	private String transformationShape;
+
+	@Option(name = "-transformation-args", aliases = {"-ta"}, usage = "comma seperated list of transformation args", metaVar = "-ta 0 200", handler = StringArrayOptionHandler.class)
+	private String[] transformationArgs;
+	
 	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths", handler = StringArrayOptionHandler.class, required = true)
 	private List<String> imagePaths;
 	
-	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type")
+	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type", required = true)
 	public void setTransformationType(String transformationType) {
 		if (transformationType.equals("brighten")) {
 			this.transformationType = TransformationType.BRIGHTEN;
@@ -38,15 +47,6 @@ public class AppArgs {
 	}
 
 	private TransformationType transformationType;
-
-	@Option(name = "-transformation-shape-args", aliases = {"-tsa"}, usage = "transformation shape args", metaVar = "-tsa 0,10 200,300", handler = StringArrayOptionHandler.class)
-	private List<String> transformationShapeArgs;
-
-	@Option(name = "-transformation-shape", aliases = {"-ts"}, usage = "transformation shape")
-	private String transformationShape;
-
-	@Option(name = "-transformation-args", aliases = {"-ta"}, usage = "comma seperated list of transformation args", metaVar = "-ta 0 200", handler = StringArrayOptionHandler.class)
-	private String[] transformationArgs;
 
 	public TransformationShape getTransformationShape() {
 		if (transformationShape == null) {
