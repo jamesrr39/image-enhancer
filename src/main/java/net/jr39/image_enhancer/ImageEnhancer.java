@@ -38,11 +38,7 @@ public class ImageEnhancer {
 		}
 
 		images.parallelStream().forEach((Image image) -> {
-			boolean lookingForNewFilePath = true;
-			int lookingForNewFilePathIteration = 0;
 			final String imageFormat = "jpg";
-			String processedImageFilePath = null;
-			File f;
 
 			AbstractTransformation chosenTransformation = appArgs.getTransformationType();
 			logger.log(Level.INFO, "performing {0} on pixels: {1}, and shape args: {2}", new Object[]{
@@ -53,22 +49,10 @@ public class ImageEnhancer {
 			image.performTransformation(chosenTransformation);
 
 			// find a new filename to save this as
-			while (lookingForNewFilePath) {
-				processedImageFilePath = image.getFilePath() + "_processed_" + lookingForNewFilePathIteration + "." + imageFormat;
-				f = new File(processedImageFilePath);
-				if (!f.exists()) {
-					lookingForNewFilePath = false;
-				} else {
-					lookingForNewFilePathIteration++;
-				}
-			}
+			final String processedImageFilePath = ImageEnhancerHelper.generateFileName(image.getFilePath());
+			ImageEnhancerHelper.saveImageToDisk(image.getLatestImage(), processedImageFilePath, imageFormat);
 
-			try {
-				ImageIO.write(image.getLatestImage(), imageFormat, new File(processedImageFilePath));
-				logger.log(Level.INFO, "Saved transformed image at: ''{0}''", processedImageFilePath);
-			} catch (IOException ex) {
-				logger.log(Level.SEVERE, "Couldn't save image: '" + processedImageFilePath + "'", ex);
-			}
+
 
 		});
 

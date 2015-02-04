@@ -25,13 +25,9 @@ public class AppArgs {
 
 	private static final Logger LOGGER = Logger.getLogger(AppArgs.class);
 	
-	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths")
-	public void setImages(List<String> imagePaths){
-		images = ImageEnhancerHelper.getImagesFromPaths(imagePaths);
-	}
+	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths", handler = StringArrayOptionHandler.class, required = true)
+	private List<String> imagePaths;
 	
-	private List<Image> images;
-
 	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type")
 	public void setTransformationType(String transformationType) {
 		if (transformationType.equals("brighten")) {
@@ -98,6 +94,7 @@ public class AppArgs {
 	}
 
 	public List<Image> getImages() {
+		List<Image> images = ImageEnhancerHelper.getImagesFromPaths(imagePaths);
 		return ImmutableList.copyOf(images);
 	}
 
