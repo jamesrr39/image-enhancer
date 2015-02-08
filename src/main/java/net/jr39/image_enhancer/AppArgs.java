@@ -28,10 +28,10 @@ public class AppArgs {
 	@Option(name = "-transformation-shape-args", aliases = {"-tsa"}, usage = "transformation shape args", metaVar = "-tsa 0,10 200,300", handler = StringArrayOptionHandler.class, depends = "-transformation-shape")
 	private List<String> transformationShapeArgs;
 
-	@Option(name = "-transformation-shape", aliases = {"-ts"}, usage = "transformation shape")
+	@Option(name = "-transformation-shape", aliases = {"-ts"}, usage = "shape the transformation takes place upon, as defined in TransformationShape.java. If not entered, defaults to the whole image.", required = false)
 	private String transformationShape;
 
-	@Option(name = "-transformation-args", aliases = {"-ta"}, usage = "comma seperated list of transformation args", metaVar = "-ta 0 200", handler = StringArrayOptionHandler.class)
+	@Option(name = "-transformation-args", aliases = {"-ta"}, usage = "comma seperated list of transformation args", metaVar = "-ta 0 200", handler = StringArrayOptionHandler.class, required = false)
 	private String[] transformationArgs;
 
 	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths", handler = StringArrayOptionHandler.class, required = true)

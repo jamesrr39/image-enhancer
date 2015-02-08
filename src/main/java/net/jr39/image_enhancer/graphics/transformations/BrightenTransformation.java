@@ -11,7 +11,8 @@ import net.jr39.image_enhancer.graphics.ImageHelper;
 import net.jr39.image_enhancer.graphics.filters.colour_filters.ColourUtils;
 
 /**
- *
+ * Transformation to Brighten (or darken) and image.
+ * To brighten, pass scale factor &gt; 1, to darken pass a scale factor &gt; 0 and &lt; 1
  * @author james
  */
 public class BrightenTransformation extends AbstractTransformation<BrightenTransformationArgs> {
