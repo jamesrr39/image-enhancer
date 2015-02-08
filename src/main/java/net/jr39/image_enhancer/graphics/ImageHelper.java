@@ -1,10 +1,12 @@
 
 package net.jr39.image_enhancer.graphics;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-public class ImageUtils {
+public class ImageHelper {
 
 	public static BufferedImage resizeImage(BufferedImage image, int width, int height){
 
@@ -15,6 +17,10 @@ public class ImageUtils {
 		
 		return resizedImage;
 
+	}
+	
+	public static int getImageIntArrayIndex(Point point, Dimension imageDimensions){
+		return (int) (point.getY() * imageDimensions.getWidth() + point.getX());
 	}
 	
 }
