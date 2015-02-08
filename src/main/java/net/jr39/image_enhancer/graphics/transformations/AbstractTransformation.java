@@ -29,7 +29,7 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	 * @param image part of the image to be transformed
 	 * @return
 	 */
-	public BufferedImage transform(BufferedImage image) {
+	public final BufferedImage transform(BufferedImage image) {
 		long startTime = System.currentTimeMillis();
 		BufferedImage transformedImage;
 		if (this.transformationArgs.getShapeArgs() == null) {
