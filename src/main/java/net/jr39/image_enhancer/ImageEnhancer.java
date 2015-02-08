@@ -1,6 +1,5 @@
 package net.jr39.image_enhancer;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,7 +23,7 @@ public class ImageEnhancer {
 		AppArgs appArgs = new AppArgs();
 		CmdLineParser parser = new CmdLineParser(appArgs);
 		parser.parseArgument(args);
-
+		
 		appArgs.getImages().parallelStream().forEach((Image image) -> {
 			final String imageFormat = "jpg";
 
