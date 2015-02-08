@@ -9,6 +9,8 @@ import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformation;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformationArgs;
+import net.jr39.image_enhancer.graphics.transformations.ContrastTransformation;
+import net.jr39.image_enhancer.graphics.transformations.ContrastTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.TransformationType;
 import net.jr39.image_enhancer.shapes.TransformationShape;
 import net.jr39.image_enhancer.shapes.args.IShapeArgs;
@@ -41,6 +43,8 @@ public class AppArgs {
 	public void setTransformationType(String transformationType) {
 		if (transformationType.equals("brighten")) {
 			this.transformationType = TransformationType.BRIGHTEN;
+		} else	if (transformationType.equals("contrast")) {
+			this.transformationType = TransformationType.CONTRAST;
 		} else {
 			throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -80,6 +84,8 @@ public class AppArgs {
 		switch (transformationType) {
 			case BRIGHTEN:
 				return new BrightenTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
+			case CONTRAST:
+				return new ContrastTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -89,6 +95,8 @@ public class AppArgs {
 		switch (transformationType) {
 			case BRIGHTEN:
 				return new BrightenTransformation((BrightenTransformationArgs) getTransformationArgs());
+			case CONTRAST:
+				return new ContrastTransformation((ContrastTransformationArgs) getTransformationArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}

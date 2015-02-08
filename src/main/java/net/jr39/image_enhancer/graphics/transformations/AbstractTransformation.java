@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import net.jr39.image_enhancer.shapes.args.RectangleArgs;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**

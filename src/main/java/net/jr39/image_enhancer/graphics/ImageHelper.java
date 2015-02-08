@@ -19,6 +19,15 @@ public class ImageHelper {
 
 	}
 	
+	/**
+	 * Gets a int array of the whole image
+	 * @param image
+	 * @return 
+	 */
+	public static int[] getImageRGB(BufferedImage image){
+		return image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
+	}
+	
 	public static int getImageIntArrayIndex(Point point, Dimension imageDimensions){
 		return (int) (point.getY() * imageDimensions.getWidth() + point.getX());
 	}

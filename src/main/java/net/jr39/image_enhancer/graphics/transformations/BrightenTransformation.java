@@ -30,7 +30,7 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 	@Override
 	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed) {
 		LOGGER.log(Level.INFO, "scale: {0}", transformationArgs.getScaleFactor());
-		int[] imageIntArray = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
+		int[] imageIntArray = ImageHelper.getImageRGB(image);
 		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
 		pixelsToBeTransformed
 				.stream()

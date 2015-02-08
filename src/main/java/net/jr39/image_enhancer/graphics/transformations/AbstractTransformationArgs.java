@@ -8,10 +8,7 @@ import net.jr39.image_enhancer.shapes.args.IShapeArgs;
  */
 public abstract class AbstractTransformationArgs {
 
-	private IShapeArgs shapeArgs;
-
-	public AbstractTransformationArgs() {
-	}
+	private final IShapeArgs shapeArgs;
 
 	public AbstractTransformationArgs(IShapeArgs shapeArgs) {
 		this.shapeArgs = shapeArgs;
