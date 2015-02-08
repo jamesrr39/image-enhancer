@@ -1,16 +1,10 @@
 package net.jr39.image_enhancer;
 
-import com.google.common.collect.ImmutableList;
-import java.awt.Point;
-import java.io.File;
+import java.awt.Color;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -31,13 +25,7 @@ public class ImageEnhancer {
 		CmdLineParser parser = new CmdLineParser(appArgs);
 		parser.parseArgument(args);
 
-		images = appArgs.getImages();
-
-		if (images.isEmpty()) {
-			logger.log(Level.WARNING, "No images loaded, specify image(s) with '-image=' argument(s)");
-		}
-
-		images.parallelStream().forEach((Image image) -> {
+		appArgs.getImages().parallelStream().forEach((Image image) -> {
 			final String imageFormat = "jpg";
 
 			AbstractTransformation chosenTransformation = appArgs.getTransformationType();
