@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import net.jr39.image_enhancer.shapes.args.RectangleArgs;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -12,6 +14,8 @@ import net.jr39.image_enhancer.shapes.args.RectangleArgs;
  * @param <T>
  */
 public abstract class AbstractTransformation<T extends AbstractTransformationArgs> {
+	
+	private static final Logger LOGGER = Logger.getLogger(AbstractTransformation.class.getName());
 
 	protected final T transformationArgs;
 
@@ -26,13 +30,16 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	 * @return
 	 */
 	public BufferedImage transform(BufferedImage image) {
-
+		long startTime = System.currentTimeMillis();
+		BufferedImage transformedImage;
 		if (this.transformationArgs.getShapeArgs() == null) {
 			// full image transformation
-			return performTransformation(image);
+			transformedImage = performTransformation(image);
 		} else {
-			return performTransformation(image, transformationArgs.getShapeArgs().getPixelsToBeTransformed());
+			transformedImage = performTransformation(image, transformationArgs.getShapeArgs().getPixelsToBeTransformed());
 		}
+		LOGGER.info("Transformation performed in " + (System.currentTimeMillis() - startTime) + "ms");
+		return transformedImage;
 	}
 
 	/**
