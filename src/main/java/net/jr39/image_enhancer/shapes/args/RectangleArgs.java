@@ -12,26 +12,14 @@ import java.util.List;
  */
 public class RectangleArgs implements IShapeArgs {
 	
-	/**
-	 * upper left point of the rectangle.
-	 * format: <code>[X,Y]</code>
-	 */
-	private final Point upperLeftPoint;
-	
 	private final Rectangle rectangle;
 	
 	/**
 	 * 
-	 * @param upperLeftPoint
 	 * @param rectangle 
 	 */
-	public RectangleArgs(Point upperLeftPoint, Rectangle rectangle){
-		this.upperLeftPoint = upperLeftPoint;
+	public RectangleArgs(Rectangle rectangle){
 		this.rectangle = rectangle;
-	}
-
-	public Point getUpperLeftPoint() {
-		return upperLeftPoint;
 	}
 
 	public Rectangle getRectangle() {
@@ -44,7 +32,7 @@ public class RectangleArgs implements IShapeArgs {
 		int index = 0;
 		for(int x = 0; x < rectangle.width; x++){
 			for(int y = 0; y < rectangle.height; y++){
-				pixels[index] = new Point(x + (int)upperLeftPoint.getX(), y + (int)upperLeftPoint.getY());
+				pixels[index] = new Point(x + (int)rectangle.getX(), y + (int)rectangle.getY());
 				index++;
 			}
 		}

@@ -1,16 +1,9 @@
 package net.jr39.image_enhancer;
 
-import com.google.common.collect.ImmutableList;
-import java.awt.Point;
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -27,56 +20,21 @@ public class ImageEnhancer {
 
 	public static void main(String[] args) throws IOException, CmdLineException {
 		
-		logger.log(Level.INFO, "arguments: {0}", Arrays.toString(args));
-		Map<String, Object> map = new HashMap<>();
-		map.put("upperLeftPoint", new Point(2,3));
-		map.put("upperLeftPoint2", new Point(2,3));
-		logger.log(Level.INFO, "map str{0}", map);
-
 		AppArgs appArgs = new AppArgs();
 		CmdLineParser parser = new CmdLineParser(appArgs);
 		parser.parseArgument(args);
-
-		logger.log(Level.INFO, "upper left point: {0}", appArgs.getTransformationShapeArgs());
 		
-		images = ImmutableList.copyOf(ImageEnhancerHelper.getImagesFromPaths(appArgs.getImagePaths()));
-
-		if (images.isEmpty()) {
-			logger.log(Level.WARNING, "No images loaded, specify image(s) with '-image=' argument(s)");
-		}
-
-		images.parallelStream().forEach((Image image) -> {
-			boolean lookingForNewFilePath = true;
-			int lookingForNewFilePathIteration = 0;
+		appArgs.getImages().parallelStream().forEach((Image image) -> {
 			final String imageFormat = "jpg";
-			String processedImageFilePath = null;
-			File f;
 
 			AbstractTransformation chosenTransformation = appArgs.getTransformationType();
-			logger.log(Level.INFO, "performing {0} with args: {1}, and shape args: {2}", new Object[]{
-				chosenTransformation.getClass().getName(),
-				appArgs.getTransformationArgs(),
-				appArgs.getTransformationShape()
-			});
 			image.performTransformation(chosenTransformation);
 
 			// find a new filename to save this as
-			while (lookingForNewFilePath) {
-				processedImageFilePath = image.getFilePath() + "_processed_" + lookingForNewFilePathIteration + "." + imageFormat;
-				f = new File(processedImageFilePath);
-				if (!f.exists()) {
-					lookingForNewFilePath = false;
-				} else {
-					lookingForNewFilePathIteration++;
-				}
-			}
+			final String processedImageFilePath = ImageEnhancerHelper.generateFileName(image.getFilePath());
+			ImageEnhancerHelper.saveImageToDisk(image.getLatestImage(), processedImageFilePath, imageFormat);
 
-			try {
-				ImageIO.write(image.getLatestImage(), imageFormat, new File(processedImageFilePath));
-				logger.log(Level.INFO, "Saved transformed image at: ''{0}''", processedImageFilePath);
-			} catch (IOException ex) {
-				logger.log(Level.SEVERE, "Couldn't save image: '" + processedImageFilePath + "'", ex);
-			}
+
 
 		});
 

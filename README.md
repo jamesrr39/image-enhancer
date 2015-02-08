@@ -15,4 +15,14 @@ Options:
 
 Example Args:
 
-    -image=/home/user/Pictures/myimage.jpg -tt=brighten -ta=1.2 -ts=rectangle -tsa 200,250 0,400
+Brighten a rectangular area
+
+    -image=/home/user/Pictures/myimage.jpg -tt=brighten -ta=1.2 -ts=rectangle -tsa 200,250 100,400
+
+Darken the whole image
+
+    -image=/home/user/Pictures/myimage.jpg -tt=brighten -ta=0.5
+
+Contrast the whole image
+
+    -image=/home/user/Pictures/myimage.jpg -tt=contrast -ta=1.5
