@@ -28,11 +28,6 @@ public class ImageEnhancer {
 			final String imageFormat = "jpg";
 
 			AbstractTransformation chosenTransformation = appArgs.getTransformationType();
-			logger.log(Level.INFO, "performing {0} on pixels: {1}, and shape args: {2}", new Object[]{
-				chosenTransformation.getClass().getName(),
-				appArgs.getTransformationArgs().getShapeArgs().getPixelsToBeTransformed(),
-				appArgs.getTransformationShape()
-			});
 			image.performTransformation(chosenTransformation);
 
 			// find a new filename to save this as

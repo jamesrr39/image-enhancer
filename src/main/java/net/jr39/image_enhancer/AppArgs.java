@@ -24,7 +24,7 @@ import org.kohsuke.args4j.spi.StringArrayOptionHandler;
 public class AppArgs {
 
 	private static final Logger LOGGER = Logger.getLogger(AppArgs.class);
-	
+
 	@Option(name = "-transformation-shape-args", aliases = {"-tsa"}, usage = "transformation shape args", metaVar = "-tsa 0,10 200,300", handler = StringArrayOptionHandler.class, depends = "-transformation-shape")
 	private List<String> transformationShapeArgs;
 
@@ -33,10 +33,10 @@ public class AppArgs {
 
 	@Option(name = "-transformation-args", aliases = {"-ta"}, usage = "comma seperated list of transformation args", metaVar = "-ta 0 200", handler = StringArrayOptionHandler.class)
 	private String[] transformationArgs;
-	
+
 	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths", handler = StringArrayOptionHandler.class, required = true)
 	private List<String> imagePaths;
-	
+
 	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type", required = true)
 	public void setTransformationType(String transformationType) {
 		if (transformationType.equals("brighten")) {
@@ -59,6 +59,11 @@ public class AppArgs {
 	}
 
 	public IShapeArgs getTransformationShapeArgs() {
+
+		if (this.getTransformationShape() == null) {
+			return null;
+		}
+
 		switch (this.getTransformationShape()) {
 			case RECTANGLE:
 				String[] upperLeftPointArg = transformationShapeArgs.get(0).split(",");
@@ -67,11 +72,7 @@ public class AppArgs {
 				Dimension dimensions = new Dimension(Integer.parseInt(dimensionsArg[0]), Integer.parseInt(dimensionsArg[1]));
 				return new RectangleArgs(new Rectangle(upperLeftPoint, dimensions));
 			default:
-				if (this.getTransformationShape() == null) {
-					return null;
-				} else {
-					throw new IllegalArgumentException("The shape '" + transformationShape + "' is not supported");
-				}
+				throw new IllegalArgumentException("The shape '" + transformationShape + "' is not supported");
 		}
 	}
 

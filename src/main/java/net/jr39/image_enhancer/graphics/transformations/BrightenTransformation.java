@@ -27,23 +27,9 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 		super(transformationArgs);
 	}
 
-	/**
-	 *
-	 * @param image image to be transformed
-	 * @return transformed image
-	 */
-	@Override
-	protected BufferedImage performTransformation(BufferedImage image) {
-		LOGGER.log(Level.INFO, "starting brighten transformation");
-		final long startTime = System.currentTimeMillis();
-		RescaleOp op = new RescaleOp(transformationArgs.getScaleFactor(), transformationArgs.getOffset(), null);
-		LOGGER.log(Level.INFO, "finished brighten transformation in {0}ms", (System.currentTimeMillis() - startTime));
-		return op.filter(image, null);
-	}
-
 	@Override
 	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed) {
-		LOGGER.info("scale: " + transformationArgs.getScaleFactor());
+		LOGGER.log(Level.INFO, "scale: {0}", transformationArgs.getScaleFactor());
 		int[] imageIntArray = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
 		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
 		pixelsToBeTransformed

@@ -9,10 +9,6 @@ import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 public class BrightenTransformationArgs extends AbstractTransformationArgs {
 
 	private final float scaleFactor;
-	/**
-	 * for contrast
-	 */
-	private final float offset = 1f;
 
 	/**
 	 *
@@ -32,10 +28,6 @@ public class BrightenTransformationArgs extends AbstractTransformationArgs {
 	public BrightenTransformationArgs(IShapeArgs shapeArgs, float scaleFactor) {
 		super(shapeArgs);
 		this.scaleFactor = scaleFactor;
-	}
-
-	public float getOffset() {
-		return offset;
 	}
 
 	public float getScaleFactor() {
