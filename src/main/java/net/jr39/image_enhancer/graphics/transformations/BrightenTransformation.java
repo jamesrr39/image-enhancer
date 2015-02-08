@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
