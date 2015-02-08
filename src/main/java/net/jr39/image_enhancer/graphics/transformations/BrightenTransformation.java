@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.jr39.image_enhancer.graphics.ImageHelper;
+import net.jr39.image_enhancer.graphics.filters.colour_filters.ColourUtils;
 
 /**
  *
@@ -42,6 +43,7 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 
 	@Override
 	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed) {
+		LOGGER.info("scale: " + transformationArgs.getScaleFactor());
 		int[] imageIntArray = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
 		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
 		pixelsToBeTransformed
@@ -49,22 +51,18 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 				.forEach((point) -> {
 					int colour = imageIntArray[ImageHelper.getImageIntArrayIndex(point, imageDimensions)];
 					colour = getBrightenedColour(colour);
-					// todo - brighten
 					image.setRGB((int)point.getX(), (int)point.getY(), colour);
 						});
 		return image;
 	}
 	
 	private int getBrightenedColour(int intcolour){
-		// optimise if needed
-		// mock factor
-		final float factor = 4f;
+		final float factor = transformationArgs.getScaleFactor();
 		final int MAX = 255; // white for that component
 		final int MIN = 0; // black (no colour) for that component
-		Color colour = new Color(intcolour);
-		int red = (int) (colour.getRed() * factor);
-		int green = (int) (colour.getGreen() * factor);
-		int blue = (int) (colour.getBlue() * factor);
+		int red = (int) (ColourUtils.getRedFromRGB(intcolour) * factor);
+		int green = (int) (ColourUtils.getGreenFromRGB(intcolour) * factor);
+		int blue = (int) (ColourUtils.getBlueFromRGB(intcolour)* factor);
 		red = red > MAX ? MAX : red;
 		blue = blue > MAX ? MAX : blue;
 		green = green > MAX ? MAX : green;
