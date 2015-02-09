@@ -26,3 +26,7 @@ Darken the whole image
 Contrast the whole image
 
     -image=/home/user/Pictures/myimage.jpg -tt=contrast -ta=1.5
+
+Grayscale whole image
+
+    -image=/home/user/Pictures/myimage.jpg -tt=grayscale

@@ -11,6 +11,8 @@ import net.jr39.image_enhancer.graphics.transformations.BrightenTransformation;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.ContrastTransformation;
 import net.jr39.image_enhancer.graphics.transformations.ContrastTransformationArgs;
+import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformation;
+import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.TransformationType;
 import net.jr39.image_enhancer.shapes.TransformationShape;
 import net.jr39.image_enhancer.shapes.args.IShapeArgs;
@@ -45,6 +47,8 @@ public class AppArgs {
 			this.transformationType = TransformationType.BRIGHTEN;
 		} else	if (transformationType.equals("contrast")) {
 			this.transformationType = TransformationType.CONTRAST;
+		} else	if (transformationType.equals("grayscale")) {
+			this.transformationType = TransformationType.GRAYSCALE;
 		} else {
 			throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -86,6 +90,8 @@ public class AppArgs {
 				return new BrightenTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
 			case CONTRAST:
 				return new ContrastTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
+			case GRAYSCALE:
+				return new GrayscaleTransformationArgs(this.getTransformationShapeArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -97,6 +103,8 @@ public class AppArgs {
 				return new BrightenTransformation((BrightenTransformationArgs) getTransformationArgs());
 			case CONTRAST:
 				return new ContrastTransformation((ContrastTransformationArgs) getTransformationArgs());
+			case GRAYSCALE:
+				return new GrayscaleTransformation((GrayscaleTransformationArgs) getTransformationArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
