@@ -1,12 +1,9 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
-import com.google.common.collect.Lists;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import net.jr39.image_enhancer.graphics.ImageHelper;
 import net.jr39.image_enhancer.graphics.filters.colour_filters.ColourUtils;
@@ -36,21 +33,20 @@ public class ContrastTransformation extends AbstractTransformation<ContrastTrans
 	private int contrastPixel(int colour) {
 		final int MAX = 255;
 		final int MIN = 0;
-		int midRed = ColourUtils.getRedFromRGB(colour) - 128;
-		int midGreen = ColourUtils.getGreenFromRGB(colour) - 128;
-		int midBlue = ColourUtils.getBlueFromRGB(colour) - 128;
-		int contrastedRed = (int) (midRed * transformationArgs.getFactor());
-		int contrastedGreen = (int) (midGreen * transformationArgs.getFactor());
-		int contrastedBlue = (int) (midBlue * transformationArgs.getFactor());
-		int wholeRed = contrastedRed + 128;
-		int wholeGreen = contrastedGreen + 128;
-		int wholeBlue = contrastedBlue + 128;
-		int maximisedRed = wholeRed > MAX ? MAX : wholeRed;
-		int minimisedRed = maximisedRed < MIN ? MIN : maximisedRed;
-		int maximisedGreen = wholeGreen > MAX ? MAX : wholeGreen;
-		int minimisedGreen = maximisedGreen < MIN ? MIN : maximisedGreen;
-		int maximisedBlue = wholeBlue > MAX ? MAX : wholeBlue;
-		int minimisedBlue = maximisedBlue < MIN ? MIN : maximisedBlue;
-		return new Color(minimisedRed, minimisedGreen, minimisedBlue).getRGB();
+		int[] colours = {
+			ColourUtils.getRedFromRGB(colour),
+			ColourUtils.getGreenFromRGB(colour),
+			ColourUtils.getBlueFromRGB(colour)
+		};
+		int[] finalColours = new int[colours.length];
+		for(int index = 0; index < colours.length; index++){
+			int individualColour = colours[index];
+			int midColour = individualColour - 128;
+			int contrastedColour = (int) (midColour * transformationArgs.getFactor());
+			int wholeColour = contrastedColour + 128;
+			int boundedColour = (wholeColour > MAX ? MAX : (wholeColour < MIN ? MIN : wholeColour));
+			finalColours[index] = boundedColour;
+		}
+		return ColourUtils.getRGBInt(finalColours[0], finalColours[1], finalColours[2]);
 	}
 }
