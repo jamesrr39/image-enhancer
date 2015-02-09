@@ -4,6 +4,9 @@ package net.jr39.image_enhancer.graphics.filters.colour_filters;
  * needed static utility functions otherwise we are creating a new Color object for each pixel.
  */
 public class ColourUtils {
+	
+	public static final int RGB_MAX = 255;
+	public static final int RGB_MIN = 0;
 
 	public static int getRedFromRGB(int binaryColour) {
 		return (binaryColour & 0x00ff0000) >> 16;

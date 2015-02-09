@@ -43,15 +43,12 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 	}
 	
 	private int getBrightenedColour(int intcolour){
-		final float factor = transformationArgs.getScaleFactor();
-		final int MAX = 255; // white for that component
-		final int MIN = 0; // black (no colour) for that component
-		int red = (int) (ColourUtils.getRedFromRGB(intcolour) * factor);
-		int green = (int) (ColourUtils.getGreenFromRGB(intcolour) * factor);
-		int blue = (int) (ColourUtils.getBlueFromRGB(intcolour)* factor);
-		red = red > MAX ? MAX : red;
-		blue = blue > MAX ? MAX : blue;
-		green = green > MAX ? MAX : green;
-		return new Color(red, green, blue).getRGB();
+		int red = (int) (ColourUtils.getRedFromRGB(intcolour) * transformationArgs.getScaleFactor());
+		int green = (int) (ColourUtils.getGreenFromRGB(intcolour) * transformationArgs.getScaleFactor());
+		int blue = (int) (ColourUtils.getBlueFromRGB(intcolour)* transformationArgs.getScaleFactor());
+		red = red > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : red;
+		blue = blue > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : blue;
+		green = green > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : green;
+		return ColourUtils.getRGBInt(red, green, blue);
 	}
 }

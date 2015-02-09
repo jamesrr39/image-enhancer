@@ -31,8 +31,6 @@ public class ContrastTransformation extends AbstractTransformation<ContrastTrans
 	}
 
 	private int contrastPixel(int colour) {
-		final int MAX = 255;
-		final int MIN = 0;
 		int[] colours = {
 			ColourUtils.getRedFromRGB(colour),
 			ColourUtils.getGreenFromRGB(colour),
@@ -44,7 +42,7 @@ public class ContrastTransformation extends AbstractTransformation<ContrastTrans
 			int midColour = individualColour - 128;
 			int contrastedColour = (int) (midColour * transformationArgs.getFactor());
 			int wholeColour = contrastedColour + 128;
-			int boundedColour = (wholeColour > MAX ? MAX : (wholeColour < MIN ? MIN : wholeColour));
+			int boundedColour = (wholeColour > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : (wholeColour < ColourUtils.RGB_MIN ? ColourUtils.RGB_MIN : wholeColour));
 			finalColours[index] = boundedColour;
 		}
 		return ColourUtils.getRGBInt(finalColours[0], finalColours[1], finalColours[2]);
