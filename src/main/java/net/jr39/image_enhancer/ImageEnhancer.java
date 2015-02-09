@@ -2,7 +2,6 @@ package net.jr39.image_enhancer;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 import org.kohsuke.args4j.CmdLineException;

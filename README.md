@@ -1,19 +1,26 @@
-Image Enhancer
+# Image Enhancer #
 
 Command line app/library to perform image transformations
 
-Requires (supported) maven 3.0.5, jdk 1.8.0_11
+## Requires ##
 
-Build:
+* maven >= 3.0.5
+* jdk >= 1.8.0_11
+
+## Build ##
 
     mvn install
 
-Options:
+## Run ##
+For now, we can use the mvn exec plugin, passing our args with the `-Dexec.args` argument. For example:
 
-    -image=[filepath]
-    Filepath to the image to be transformed. Pass this argument multiple times if required
+    mvn exec:java -Dexec.args="-image=/home/user/Pictures/myImage.jpg -tt=brighten -ta=1.2"
 
-Example Args:
+## Options ##
+
+See `AppArgs.java`
+
+## Example Args ##
 
 Brighten a rectangular area
 
