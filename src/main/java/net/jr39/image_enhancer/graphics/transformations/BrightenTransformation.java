@@ -1,6 +1,5 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;

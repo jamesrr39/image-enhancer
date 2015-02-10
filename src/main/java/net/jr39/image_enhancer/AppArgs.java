@@ -14,7 +14,9 @@ import net.jr39.image_enhancer.graphics.transformations.ContrastTransformationAr
 import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformation;
 import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.TransformationType;
+import net.jr39.image_enhancer.shapes.Circle;
 import net.jr39.image_enhancer.shapes.TransformationShape;
+import net.jr39.image_enhancer.shapes.args.CircleArgs;
 import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 import net.jr39.image_enhancer.shapes.args.RectangleArgs;
 import org.apache.log4j.Logger;
@@ -61,6 +63,8 @@ public class AppArgs {
 			return null;
 		} else if (transformationShape.equals("rectangle")) {
 			return TransformationShape.RECTANGLE;
+		} else if (transformationShape.equals("circle")) {
+			return TransformationShape.CIRCLE;
 		} else {
 			throw new IllegalArgumentException("The shape '" + transformationShape + "' is not supported");
 		}
@@ -79,6 +83,11 @@ public class AppArgs {
 				Point upperLeftPoint = new Point(Integer.parseInt(upperLeftPointArg[0]), Integer.parseInt(upperLeftPointArg[1]));
 				Dimension dimensions = new Dimension(Integer.parseInt(dimensionsArg[0]), Integer.parseInt(dimensionsArg[1]));
 				return new RectangleArgs(new Rectangle(upperLeftPoint, dimensions));
+			case CIRCLE:
+				String[] centrePointArg = transformationShapeArgs.get(0).split(",");
+				int radius = Integer.parseInt(transformationShapeArgs.get(1));
+				Point centrePoint = new Point(Integer.parseInt(centrePointArg[0]), Integer.parseInt(centrePointArg[1]));
+				return new CircleArgs(new Circle(centrePoint, radius));
 			default:
 				throw new IllegalArgumentException("The shape '" + transformationShape + "' is not supported");
 		}
