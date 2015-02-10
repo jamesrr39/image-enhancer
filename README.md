@@ -37,3 +37,7 @@ Contrast the whole image
 Grayscale whole image
 
     -image=/home/user/Pictures/myimage.jpg -tt=grayscale
+
+Darken a circle with a centre point of [x,y] [200,250] and a radius of 100px
+
+    -image=/home/user/Pictures/myimage.jpg -tt=brighten -ta=0.5 -ts=circle -tsa 200,250 100
