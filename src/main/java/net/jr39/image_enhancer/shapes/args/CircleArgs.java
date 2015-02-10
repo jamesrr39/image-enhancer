@@ -17,7 +17,7 @@ public class CircleArgs implements IShapeArgs{
 	public CircleArgs(Circle circle){
 		this.circle = circle;
 	}
-	
+
 	@Override
 	public List<Point> getPixelsToBeTransformed() {
 		List<Point> pixelsToBeTransformed = new ArrayList<>();
