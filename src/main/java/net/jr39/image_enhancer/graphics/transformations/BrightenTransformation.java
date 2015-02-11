@@ -1,12 +1,8 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.jr39.image_enhancer.graphics.ImageHelper;
 import net.jr39.image_enhancer.graphics.filters.colour_filters.ColourUtils;
 
 /**
@@ -27,24 +23,10 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 	}
 
 	@Override
-	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed) {
-		LOGGER.log(Level.INFO, "scale: {0}", transformationArgs.getScaleFactor());
-		int[] imageIntArray = ImageHelper.getImageRGB(image);
-		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
-		pixelsToBeTransformed
-				.stream()
-				.forEach((point) -> {
-					int colour = imageIntArray[ImageHelper.getImageIntArrayIndex(point, imageDimensions)];
-					colour = getBrightenedColour(colour);
-					image.setRGB((int)point.getX(), (int)point.getY(), colour);
-						});
-		return image;
-	}
-	
-	private int getBrightenedColour(int intcolour){
-		int red = (int) (ColourUtils.getRedFromRGB(intcolour) * transformationArgs.getScaleFactor());
-		int green = (int) (ColourUtils.getGreenFromRGB(intcolour) * transformationArgs.getScaleFactor());
-		int blue = (int) (ColourUtils.getBlueFromRGB(intcolour)* transformationArgs.getScaleFactor());
+	protected int transformPixel(Point point, int colour, BufferedImage image) {
+		int red = (int) (ColourUtils.getRedFromRGB(colour) * transformationArgs.getScaleFactor());
+		int green = (int) (ColourUtils.getGreenFromRGB(colour) * transformationArgs.getScaleFactor());
+		int blue = (int) (ColourUtils.getBlueFromRGB(colour)* transformationArgs.getScaleFactor());
 		red = red > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : red;
 		blue = blue > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : blue;
 		green = green > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : green;

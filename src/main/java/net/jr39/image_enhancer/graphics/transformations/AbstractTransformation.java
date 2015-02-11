@@ -1,9 +1,11 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import net.jr39.image_enhancer.graphics.ImageHelper;
 import net.jr39.image_enhancer.shapes.args.RectangleArgs;
 import org.apache.log4j.Logger;
 
@@ -54,6 +56,16 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 		return performTransformation(image, pixelsToBeTransformed);
 	}
 
-	protected abstract BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed);
+	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed){
+		int[] imagePixels = ImageHelper.getImageRGB(image);
+		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
+		pixelsToBeTransformed.forEach((point) -> {
+			int colour = imagePixels[ImageHelper.getImageIntArrayIndex(point, imageDimensions)];
+			image.setRGB((int) point.getX(), (int) point.getY(), transformPixel(point, colour, image));
+		});
+		return image;
+	}
+	
+	protected abstract int transformPixel(Point point, int colour, BufferedImage image);
 
 }
