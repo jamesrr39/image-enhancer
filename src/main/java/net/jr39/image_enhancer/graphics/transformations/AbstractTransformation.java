@@ -5,9 +5,10 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.logging.Level;
 import net.jr39.image_enhancer.graphics.ImageHelper;
 import net.jr39.image_enhancer.shapes.args.RectangleArgs;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,7 +40,7 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 		} else {
 			transformedImage = performTransformation(image, transformationArgs.getShapeArgs().getPixelsToBeTransformed());
 		}
-		LOGGER.info("Transformation performed in " + (System.currentTimeMillis() - startTime) + "ms");
+		LOGGER.log(Level.INFO, "Transformation performed in {0}ms", (System.currentTimeMillis() - startTime));
 		return transformedImage;
 	}
 
@@ -60,6 +61,13 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 		int[] imagePixels = ImageHelper.getImageRGB(image);
 		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
 		pixelsToBeTransformed.forEach((point) -> {
+			if(point.getX() < 0 || point.getX() > imageDimensions.getWidth() || point.getY() < 0 || point.getY() > imageDimensions.getHeight()){
+				LOGGER.log(Level.WARNING, "Point [{0}, {1}] is out of the bounds of the image", new Object[]{
+					point.getX(),
+					point.getY()
+				});
+				return;
+			}
 			int colour = imagePixels[ImageHelper.getImageIntArrayIndex(point, imageDimensions)];
 			image.setRGB((int) point.getX(), (int) point.getY(), transformPixel(point, colour, image));
 		});
