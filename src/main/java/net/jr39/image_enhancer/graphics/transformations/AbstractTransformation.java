@@ -34,13 +34,19 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	public final BufferedImage transform(BufferedImage image) {
 		long startTime = System.currentTimeMillis();
 		BufferedImage transformedImage;
+		final int numberOfPixelsTransformed;
 		if (this.transformationArgs.getShapeArgs() == null) {
 			// full image transformation
 			transformedImage = performTransformation(image);
+			numberOfPixelsTransformed = image.getWidth() * image.getHeight();
 		} else {
 			transformedImage = performTransformation(image, transformationArgs.getShapeArgs().getPixelsToBeTransformed());
+			numberOfPixelsTransformed = transformationArgs.getShapeArgs().getPixelsToBeTransformed().size();
 		}
-		LOGGER.log(Level.INFO, "Transformation performed in {0}ms", (System.currentTimeMillis() - startTime));
+		LOGGER.log(Level.INFO, "{0} pixels transformed in {1}ms", new Object[]{
+			numberOfPixelsTransformed,
+			System.currentTimeMillis() - startTime
+		});
 		return transformedImage;
 	}
 
