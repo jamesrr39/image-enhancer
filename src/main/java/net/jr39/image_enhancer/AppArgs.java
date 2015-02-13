@@ -45,14 +45,18 @@ public class AppArgs {
 
 	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type", required = true)
 	public void setTransformationType(String transformationType) {
-		if (transformationType.equals("brighten")) {
-			this.transformationType = TransformationType.BRIGHTEN;
-		} else	if (transformationType.equals("contrast")) {
-			this.transformationType = TransformationType.CONTRAST;
-		} else	if (transformationType.equals("grayscale")) {
-			this.transformationType = TransformationType.GRAYSCALE;
-		} else {
-			throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
+		switch (transformationType) {
+			case "brighten":
+				this.transformationType = TransformationType.BRIGHTEN;
+				break;
+			case "contrast":
+				this.transformationType = TransformationType.CONTRAST;
+				break;
+			case "grayscale":
+				this.transformationType = TransformationType.GRAYSCALE;
+				break;
+			default:
+				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
 	}
 
