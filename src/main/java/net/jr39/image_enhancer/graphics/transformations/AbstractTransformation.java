@@ -33,6 +33,7 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	 */
 	public final BufferedImage transform(BufferedImage image) {
 		long startTime = System.currentTimeMillis();
+		image = ImageHelper.cloneImage(image);
 		BufferedImage transformedImage;
 		final int numberOfPixelsTransformed;
 		if (this.transformationArgs.getShapeArgs() == null) {

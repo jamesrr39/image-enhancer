@@ -100,7 +100,8 @@ public class AppArgs {
 	public AbstractTransformationArgs getTransformationArgs() {
 		switch (transformationType) {
 			case BRIGHTEN:
-				return new BrightenTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
+				boolean isGradualTransformation = transformationArgs.length > 1 && "gradual".equals(transformationArgs[1]);
+				return new BrightenTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]), isGradualTransformation);
 			case CONTRAST:
 				return new ContrastTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
 			case GRAYSCALE:

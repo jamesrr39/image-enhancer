@@ -8,6 +8,10 @@ import java.awt.image.BufferedImage;
 
 public class ImageHelper {
 
+	public static BufferedImage cloneImage(BufferedImage image){
+		return new BufferedImage(image.getColorModel(), image.copyData(null), image.getColorModel().isAlphaPremultiplied(), null);
+	}
+	
 	public static BufferedImage resizeImage(BufferedImage image, int width, int height){
 
 		BufferedImage resizedImage = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
