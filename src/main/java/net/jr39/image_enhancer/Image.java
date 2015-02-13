@@ -8,7 +8,7 @@ package net.jr39.image_enhancer;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
@@ -20,7 +20,7 @@ import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 public class Image {
 
 	private final String filePath;
-	private final List<BufferedImage> imageStages = new ArrayList<>();
+	private final List<BufferedImage> imageStages = new LinkedList<>();
 
 	public Image(String filePath) throws IOException {
 		this.filePath = filePath;
