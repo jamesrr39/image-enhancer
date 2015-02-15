@@ -1,5 +1,6 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
+import com.google.common.annotations.VisibleForTesting;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -28,20 +29,31 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 		if (transformationArgs.getIsGradual()) {
 			// to start, assume centre of the transformation shape is the middle of the image
 			Point transformationCentre = new Point(image.getWidth() / 2, image.getHeight() / 2);
-			Dimension transformationDimensions = new Dimension(image.getWidth(), image.getHeight());
-			// distance factor to multiply by; as it gets closer to the centre this should become closer to 1; as we move to the edge of the transformation area it should move towards 0
-			double xDistanceFromCentre = Math.abs(point.getX() - transformationCentre.getX()) / transformationCentre.getX();
-			double yDistanceFromCentre = Math.abs(point.getY() - transformationCentre.getY()) / transformationCentre.getY();
-			double decimalDistanceFromCentre = Math.sqrt(Math.pow(xDistanceFromCentre, 2) + Math.pow(yDistanceFromCentre, 2));
-
-			double thisPixelFactor = decimalDistanceFromCentre * transformationArgs.getScaleFactor();
-			return brightenPixel(colour, (float) thisPixelFactor);
+			float appliedTransformationFactor = (float) ((transformationArgs.getScaleFactor() - 1) * getDecimalDistanceFromCentre(point, transformationCentre) + 1);
+			return brightenPixel(colour, appliedTransformationFactor);
 		} else {
 			return brightenPixel(colour, transformationArgs.getScaleFactor());
 		}
 	}
 
-	public static int brightenPixel(int colour, float scaleFactor) {
+	/**
+	 * distance factor to multiply by; as it gets closer to the centre this should become closer to 1; as we move to the edge of the transformation area it should move towards 0
+	 * @param point co-ords of the current pixel
+	 * @param transformationCentre co-ords of the centre of the transformation
+	 * @return 
+	 */
+	@VisibleForTesting
+	static double getDecimalDistanceFromCentre(Point point, Point transformationCentre) {
+
+		double xDistanceFromCentre = Math.abs((Math.abs(point.getX() - transformationCentre.getX()) / transformationCentre.getX()) - 1);
+		double yDistanceFromCentre = Math.abs((Math.abs(point.getY() - transformationCentre.getY()) / transformationCentre.getY()) - 1);
+		double decimalDistanceFromCentre = Math.sqrt(Math.pow(xDistanceFromCentre, 2) + Math.pow(yDistanceFromCentre, 2)) / Math.sqrt(2);
+
+		return Math.abs(decimalDistanceFromCentre);
+	}
+
+	@VisibleForTesting
+	static int brightenPixel(int colour, float scaleFactor) {
 		int red = (int) (ColourUtils.getRedFromRGB(colour) * scaleFactor);
 		int green = (int) (ColourUtils.getGreenFromRGB(colour) * scaleFactor);
 		int blue = (int) (ColourUtils.getBlueFromRGB(colour) * scaleFactor);
