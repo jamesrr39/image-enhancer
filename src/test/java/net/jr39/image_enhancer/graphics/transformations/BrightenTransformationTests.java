@@ -73,7 +73,7 @@ public class BrightenTransformationTests {
 		Assert.assertEquals("Is 0 at the edges", (double) 0, BrightenTransformation.getDecimalDistanceFromCentre(bottomLeftPoint, transformationCentre));
 		Assert.assertEquals("Is 0 at the edges", (double) 0, BrightenTransformation.getDecimalDistanceFromCentre(bottomRightPoint, transformationCentre));
 		
-		Assert.assertEquals("Is 0.5 at halfway", (double) 0.5f, BrightenTransformation.getDecimalDistanceFromCentre(halfwayPoint, transformationCentre));
+		Assert.assertEquals("Is 0.5 at halfway", 0.5, BrightenTransformation.getDecimalDistanceFromCentre(halfwayPoint, transformationCentre));
 
 	}
 
