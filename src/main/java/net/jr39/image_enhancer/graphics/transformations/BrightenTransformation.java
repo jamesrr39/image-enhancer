@@ -1,7 +1,6 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
 import com.google.common.annotations.VisibleForTesting;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
