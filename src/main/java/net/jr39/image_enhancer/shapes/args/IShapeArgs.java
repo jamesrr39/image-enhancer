@@ -12,4 +12,6 @@ public interface IShapeArgs {
 
 	public abstract List<Point> getPixelsToBeTransformed();
 	
+	public abstract Point getTransformationCentre();
+	
 }

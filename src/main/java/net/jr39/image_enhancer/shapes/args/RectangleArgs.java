@@ -39,4 +39,9 @@ public class RectangleArgs implements IShapeArgs {
 		return ImmutableList.of(pixels);
 	}
 
+	@Override
+	public Point getTransformationCentre() {
+		return new Point((int) this.rectangle.getCenterX(), (int) this.rectangle.getCenterY());
+	}
+
 }

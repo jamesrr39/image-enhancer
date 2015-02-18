@@ -41,7 +41,8 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 			transformedImage = performTransformation(image);
 			numberOfPixelsTransformed = image.getWidth() * image.getHeight();
 		} else {
-			transformedImage = performTransformation(image, transformationArgs.getShapeArgs().getPixelsToBeTransformed());
+			final Point transformationCentre = transformationArgs.getShapeArgs().getTransformationCentre();
+			transformedImage = performTransformation(image, transformationArgs.getShapeArgs().getPixelsToBeTransformed(), transformationCentre);
 			numberOfPixelsTransformed = transformationArgs.getShapeArgs().getPixelsToBeTransformed().size();
 		}
 		LOGGER.log(Level.INFO, "{0} pixels transformed in {1}ms", new Object[]{
@@ -61,10 +62,11 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 	protected BufferedImage performTransformation(BufferedImage image) {
 		RectangleArgs r = new RectangleArgs(new Rectangle(0, 0, image.getWidth(), image.getHeight()));
 		List<Point> pixelsToBeTransformed = r.getPixelsToBeTransformed();
-		return performTransformation(image, pixelsToBeTransformed);
+		Point transformationCentre = new Point(image.getWidth() / 2, image.getHeight() / 2);
+		return performTransformation(image, pixelsToBeTransformed, transformationCentre);
 	}
 
-	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed){
+	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed, Point transformationCentre){
 		int[] imagePixels = ImageHelper.getImageRGB(image);
 		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
 		pixelsToBeTransformed.forEach((point) -> {
@@ -78,7 +80,6 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 			int colour = imagePixels[ImageHelper.getImageIntArrayIndex(point, imageDimensions)];
 			
 			// todo shape to implement transformationCentre
-			Point transformationCentre = new Point(image.getWidth() / 2, image.getHeight() / 2);
 			int newColour = transformationArgs.getIsGradual() ? graduallyTransformPixel(point, colour, image, transformationCentre) : transformPixel(point, colour, image);
 			
 			image.setRGB((int) point.getX(), (int) point.getY(), newColour);

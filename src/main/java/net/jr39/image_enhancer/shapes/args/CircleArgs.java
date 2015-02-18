@@ -37,4 +37,9 @@ public class CircleArgs implements IShapeArgs{
 		return pixelsToBeTransformed;
 	}
 
+	@Override
+	public Point getTransformationCentre() {
+		return circle.getCentre();
+	}
+
 }
