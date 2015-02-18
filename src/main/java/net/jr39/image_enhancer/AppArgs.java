@@ -44,7 +44,7 @@ public class AppArgs {
 	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths", handler = StringArrayOptionHandler.class, required = true)
 	private List<String> imagePaths;
 	
-	@Option(name = "-gradual", usage="is this transformation to be gradual or constant", metaVar = "-gradual")
+	@Option(name = "-gradual", usage="is this transformation to be gradual or constant", metaVar = "-gradual", required = false)
 	private boolean isGradualTransformation = false;
 	
 	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type", required = true)
