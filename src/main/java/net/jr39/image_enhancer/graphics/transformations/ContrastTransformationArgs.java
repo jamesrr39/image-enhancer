@@ -10,9 +10,13 @@ public class ContrastTransformationArgs extends AbstractTransformationArgs {
 
 	private final float factor;
 
-	public ContrastTransformationArgs(IShapeArgs shapeArgs, float factor) {
-		super(shapeArgs);
+	public ContrastTransformationArgs(IShapeArgs shapeArgs, float factor, boolean isGradual) {
+		super(shapeArgs, isGradual);
 		this.factor = factor;
+	}
+	
+	public ContrastTransformationArgs(IShapeArgs shapeArgs, float factor) {
+		this(shapeArgs, factor, false);
 	}
 
 	public float getFactor() {

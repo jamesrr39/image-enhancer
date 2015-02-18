@@ -1,5 +1,6 @@
 package net.jr39.image_enhancer.graphics.transformations;
 
+import com.google.common.annotations.VisibleForTesting;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import net.jr39.image_enhancer.graphics.filters.colour_filters.ColourUtils;
@@ -15,7 +16,18 @@ public class ContrastTransformation extends AbstractTransformation<ContrastTrans
 	}
 
 	@Override
+	protected int graduallyTransformPixel(Point point, int colour, BufferedImage image, Point transformationCentre) {
+		float appliedTransformationFactor = (float) ((transformationArgs.getFactor() - 1) * GradualTransformationHelper.getDecimalDistanceFromCentre(point, transformationCentre) + 1);
+		return getTransformedColour(colour, appliedTransformationFactor);
+	}
+	
+	@Override
 	protected int transformPixel(Point point, int colour, BufferedImage image) {
+		return getTransformedColour(colour, transformationArgs.getFactor());
+	}
+	
+	@VisibleForTesting
+	static int getTransformedColour(int colour, float scaleFactor){
 		int[] colours = {
 			ColourUtils.getRedFromRGB(colour),
 			ColourUtils.getGreenFromRGB(colour),
@@ -25,7 +37,7 @@ public class ContrastTransformation extends AbstractTransformation<ContrastTrans
 		for(int index = 0; index < colours.length; index++){
 			int individualColour = colours[index];
 			int midColour = individualColour - 128;
-			int contrastedColour = (int) (midColour * transformationArgs.getFactor());
+			int contrastedColour = (int) (midColour * scaleFactor);
 			int wholeColour = contrastedColour + 128;
 			int boundedColour = (wholeColour > ColourUtils.RGB_MAX ? ColourUtils.RGB_MAX : (wholeColour < ColourUtils.RGB_MIN ? ColourUtils.RGB_MIN : wholeColour));
 			finalColours[index] = boundedColour;

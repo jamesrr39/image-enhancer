@@ -9,7 +9,7 @@ import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 public class GrayscaleTransformationArgs extends AbstractTransformationArgs{
 
 	public GrayscaleTransformationArgs(IShapeArgs shapeArgs) {
-		super(shapeArgs);
+		super(shapeArgs, false);
 	}
 
 }

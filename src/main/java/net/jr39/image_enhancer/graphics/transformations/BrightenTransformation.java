@@ -24,31 +24,14 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 	}
 
 	@Override
-	protected int graduallyTransformPixel(Point point, int colour, BufferedImage image) {
-		Point transformationCentre = new Point(image.getWidth() / 2, image.getHeight() / 2);
-		float appliedTransformationFactor = (float) ((transformationArgs.getScaleFactor() - 1) * getDecimalDistanceFromCentre(point, transformationCentre) + 1);
+	protected int graduallyTransformPixel(Point point, int colour, BufferedImage image, Point transformationCentre) {
+		float appliedTransformationFactor = (float) ((transformationArgs.getScaleFactor() - 1) * GradualTransformationHelper.getDecimalDistanceFromCentre(point, transformationCentre) + 1);
 		return brightenPixel(colour, appliedTransformationFactor);
 	}
 	
 	@Override
 	protected int transformPixel(Point point, int colour, BufferedImage image) {
 		return brightenPixel(colour, transformationArgs.getScaleFactor());
-	}
-
-	/**
-	 * distance factor to multiply by; as it gets closer to the centre this should become closer to 1; as we move to the edge of the transformation area it should move towards 0
-	 * @param point co-ords of the current pixel
-	 * @param transformationCentre co-ords of the centre of the transformation
-	 * @return 
-	 */
-	@VisibleForTesting
-	static double getDecimalDistanceFromCentre(Point point, Point transformationCentre) {
-
-		double xDistanceFromCentre = Math.abs((Math.abs(point.getX() - transformationCentre.getX()) / transformationCentre.getX()) - 1);
-		double yDistanceFromCentre = Math.abs((Math.abs(point.getY() - transformationCentre.getY()) / transformationCentre.getY()) - 1);
-		double decimalDistanceFromCentre = Math.sqrt(Math.pow(xDistanceFromCentre, 2) + Math.pow(yDistanceFromCentre, 2)) / Math.sqrt(2);
-
-		return Math.abs(decimalDistanceFromCentre);
 	}
 
 	@VisibleForTesting

@@ -42,7 +42,10 @@ public class AppArgs {
 
 	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths", handler = StringArrayOptionHandler.class, required = true)
 	private List<String> imagePaths;
-
+	
+	@Option(name = "-gradual", metaVar = "-gradual true", required = false)
+	private boolean isGradualTransformation = false;
+	
 	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type", required = true)
 	public void setTransformationType(String transformationType) {
 		switch (transformationType) {
@@ -100,10 +103,9 @@ public class AppArgs {
 	public AbstractTransformationArgs getTransformationArgs() {
 		switch (transformationType) {
 			case BRIGHTEN:
-				boolean isGradualTransformation = transformationArgs.length > 1 && "gradual".equals(transformationArgs[1]);
 				return new BrightenTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]), isGradualTransformation);
 			case CONTRAST:
-				return new ContrastTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]));
+				return new ContrastTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]), isGradualTransformation);
 			case GRAYSCALE:
 				return new GrayscaleTransformationArgs(this.getTransformationShapeArgs());
 			default:
