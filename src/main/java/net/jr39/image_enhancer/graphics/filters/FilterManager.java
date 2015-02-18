@@ -14,8 +14,7 @@ import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 import net.jr39.image_enhancer.graphics.ColourRange;
 import net.jr39.image_enhancer.graphics.filters.colour_filters.ColourUtils;
 
@@ -27,7 +26,7 @@ public class FilterManager {
 		private final int xStartInput, yStartInput, filterWidth, filterHeight;
 		private final int minRed, maxRed, minGreen, maxGreen, minBlue, maxBlue;
 		private final boolean isRedFilterApplied, isGreenFilterApplied, isBlueFilterApplied;
-		private final Logger logger = Logger.getLogger(this.getClass().getName());
+		private static final Logger logger = Logger.getLogger(FilterManager.class.getName());
 
 		public FilterManager(BufferedImage image, int xStartInput, int yStartInput, int filterWidth, int filterHeight, boolean redColourFilter, boolean greenColourFilter, boolean blueColourFilter) {
 				this.originalImage = image;
