@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformation;
@@ -19,7 +21,6 @@ import net.jr39.image_enhancer.shapes.TransformationShape;
 import net.jr39.image_enhancer.shapes.args.CircleArgs;
 import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 import net.jr39.image_enhancer.shapes.args.RectangleArgs;
-import org.apache.log4j.Logger;
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.spi.StringArrayOptionHandler;
 
@@ -29,7 +30,7 @@ import org.kohsuke.args4j.spi.StringArrayOptionHandler;
  */
 public class AppArgs {
 
-	private static final Logger LOGGER = Logger.getLogger(AppArgs.class);
+	private static final Logger LOGGER = Logger.getLogger(AppArgs.class.getName());
 
 	@Option(name = "-transformation-shape-args", aliases = {"-tsa"}, usage = "transformation shape args", metaVar = "-tsa 0,10 200,300", handler = StringArrayOptionHandler.class, depends = "-transformation-shape")
 	private List<String> transformationShapeArgs;
@@ -43,7 +44,7 @@ public class AppArgs {
 	@Option(name = "-image", aliases = {"-i"}, usage = "absolute image filepaths", handler = StringArrayOptionHandler.class, required = true)
 	private List<String> imagePaths;
 	
-	@Option(name = "-gradual", metaVar = "-gradual true", required = false)
+	@Option(name = "-gradual", usage="is this transformation to be gradual or constant", metaVar = "-gradual")
 	private boolean isGradualTransformation = false;
 	
 	@Option(name = "-transformation-type", aliases = {"-tt"}, usage = "transformation type", required = true)
