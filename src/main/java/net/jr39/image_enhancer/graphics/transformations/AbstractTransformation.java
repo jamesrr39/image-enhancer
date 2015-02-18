@@ -76,9 +76,15 @@ public abstract class AbstractTransformation<T extends AbstractTransformationArg
 				return;
 			}
 			int colour = imagePixels[ImageHelper.getImageIntArrayIndex(point, imageDimensions)];
-			image.setRGB((int) point.getX(), (int) point.getY(), transformPixel(point, colour, image));
+			int newColour = transformationArgs.getIsGradual() ? graduallyTransformPixel(point, colour, image) : transformPixel(point, colour, image);
+			image.setRGB((int) point.getX(), (int) point.getY(), newColour);
 		});
 		return image;
+	}
+	
+	protected int graduallyTransformPixel(Point point, int colour, BufferedImage image){
+		LOGGER.log(Level.WARNING, "The selected transformation ''{0}'' doesn''t offer a gradual transformation, proceeding with a normal transformation", transformationArgs.getClass().getSimpleName());
+		return transformPixel(point, colour, image);
 	}
 	
 	protected abstract int transformPixel(Point point, int colour, BufferedImage image);

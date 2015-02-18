@@ -24,15 +24,15 @@ public class BrightenTransformation extends AbstractTransformation<BrightenTrans
 	}
 
 	@Override
+	protected int graduallyTransformPixel(Point point, int colour, BufferedImage image) {
+		Point transformationCentre = new Point(image.getWidth() / 2, image.getHeight() / 2);
+		float appliedTransformationFactor = (float) ((transformationArgs.getScaleFactor() - 1) * getDecimalDistanceFromCentre(point, transformationCentre) + 1);
+		return brightenPixel(colour, appliedTransformationFactor);
+	}
+	
+	@Override
 	protected int transformPixel(Point point, int colour, BufferedImage image) {
-		if (transformationArgs.getIsGradual()) {
-			// to start, assume centre of the transformation shape is the middle of the image
-			Point transformationCentre = new Point(image.getWidth() / 2, image.getHeight() / 2);
-			float appliedTransformationFactor = (float) ((transformationArgs.getScaleFactor() - 1) * getDecimalDistanceFromCentre(point, transformationCentre) + 1);
-			return brightenPixel(colour, appliedTransformationFactor);
-		} else {
-			return brightenPixel(colour, transformationArgs.getScaleFactor());
-		}
+		return brightenPixel(colour, transformationArgs.getScaleFactor());
 	}
 
 	/**

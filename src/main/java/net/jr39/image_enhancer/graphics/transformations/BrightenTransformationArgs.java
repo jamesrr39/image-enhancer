@@ -9,11 +9,6 @@ import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 public class BrightenTransformationArgs extends AbstractTransformationArgs {
 
 	private final float scaleFactor;
-	private final boolean isGradual;
-
-	public boolean getIsGradual() {
-		return isGradual;
-	}
 
 	
 	/**
@@ -23,9 +18,8 @@ public class BrightenTransformationArgs extends AbstractTransformationArgs {
 	 * @param isGradual
 	 */
 	public BrightenTransformationArgs(IShapeArgs shapeArgs, float scaleFactor, boolean isGradual) {
-		super(shapeArgs);
+		super(shapeArgs, isGradual);
 		this.scaleFactor = scaleFactor;
-		this.isGradual = isGradual;
 	}
 	
 	/**

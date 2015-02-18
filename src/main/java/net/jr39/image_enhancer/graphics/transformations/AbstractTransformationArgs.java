@@ -9,9 +9,15 @@ import net.jr39.image_enhancer.shapes.args.IShapeArgs;
 public abstract class AbstractTransformationArgs {
 
 	private final IShapeArgs shapeArgs;
+	private final boolean isGradual;
 
-	public AbstractTransformationArgs(IShapeArgs shapeArgs) {
+	public boolean getIsGradual() {
+		return isGradual;
+	}
+
+	public AbstractTransformationArgs(IShapeArgs shapeArgs, boolean isGradual) {
 		this.shapeArgs = shapeArgs;
+		this.isGradual = isGradual;
 	}
 
 	public IShapeArgs getShapeArgs() {
