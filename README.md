@@ -1,4 +1,4 @@
-# Image Enhancer #
+# Image Enhancer [![Build Status](https://travis-ci.org/jamesrr39/image-enhancer.svg?branch=master)](https://travis-ci.org/jamesrr39/image-enhancer)#
 
 Command line app/library to perform image transformations
 
