@@ -14,7 +14,11 @@ public abstract class AbstractTransformationArgs {
 	public boolean getIsGradual() {
 		return isGradual;
 	}
-
+	
+	public AbstractTransformationArgs(IShapeArgs shapeArgs) {
+		this(shapeArgs, false);
+	}
+	
 	public AbstractTransformationArgs(IShapeArgs shapeArgs, boolean isGradual) {
 		this.shapeArgs = shapeArgs;
 		this.isGradual = isGradual;

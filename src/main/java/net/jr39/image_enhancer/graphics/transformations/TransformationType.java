@@ -7,5 +7,6 @@ package net.jr39.image_enhancer.graphics.transformations;
 public enum TransformationType {
 	BRIGHTEN,
 	CONTRAST,
-	GRAYSCALE
+	GRAYSCALE,
+	SEPIA
 }
