@@ -15,6 +15,8 @@ import net.jr39.image_enhancer.graphics.transformations.ContrastTransformation;
 import net.jr39.image_enhancer.graphics.transformations.ContrastTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformation;
 import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformationArgs;
+import net.jr39.image_enhancer.graphics.transformations.SepiaTransformation;
+import net.jr39.image_enhancer.graphics.transformations.SepiaTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.TransformationType;
 import net.jr39.image_enhancer.shapes.Circle;
 import net.jr39.image_enhancer.shapes.TransformationShape;
@@ -58,6 +60,9 @@ public class AppArgs {
 				break;
 			case "grayscale":
 				this.transformationType = TransformationType.GRAYSCALE;
+				break;
+			case "sepia":
+				this.transformationType = TransformationType.SEPIA;
 				break;
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
@@ -109,6 +114,8 @@ public class AppArgs {
 				return new ContrastTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]), isGradualTransformation);
 			case GRAYSCALE:
 				return new GrayscaleTransformationArgs(this.getTransformationShapeArgs());
+			case SEPIA:
+				return new SepiaTransformationArgs(this.getTransformationShapeArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -122,6 +129,8 @@ public class AppArgs {
 				return new ContrastTransformation((ContrastTransformationArgs) getTransformationArgs());
 			case GRAYSCALE:
 				return new GrayscaleTransformation((GrayscaleTransformationArgs) getTransformationArgs());
+			case SEPIA:
+				return new SepiaTransformation((SepiaTransformationArgs) getTransformationArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
