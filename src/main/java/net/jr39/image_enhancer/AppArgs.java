@@ -5,10 +5,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.jr39.image_enhancer.graphics.transformations.AbstractTransformation;
-import net.jr39.image_enhancer.graphics.transformations.AbstractTransformationArgs;
+import net.jr39.image_enhancer.graphics.transformations.GenericTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformation;
 import net.jr39.image_enhancer.graphics.transformations.BrightenTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.ContrastTransformation;
@@ -16,7 +15,6 @@ import net.jr39.image_enhancer.graphics.transformations.ContrastTransformationAr
 import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformation;
 import net.jr39.image_enhancer.graphics.transformations.GrayscaleTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.SepiaTransformation;
-import net.jr39.image_enhancer.graphics.transformations.SepiaTransformationArgs;
 import net.jr39.image_enhancer.graphics.transformations.TransformationType;
 import net.jr39.image_enhancer.shapes.Circle;
 import net.jr39.image_enhancer.shapes.TransformationShape;
@@ -106,7 +104,7 @@ public class AppArgs {
 		}
 	}
 
-	public AbstractTransformationArgs getTransformationArgs() {
+	public GenericTransformationArgs getTransformationArgs() {
 		switch (transformationType) {
 			case BRIGHTEN:
 				return new BrightenTransformationArgs(this.getTransformationShapeArgs(), Float.parseFloat(transformationArgs[0]), isGradualTransformation);
@@ -115,7 +113,7 @@ public class AppArgs {
 			case GRAYSCALE:
 				return new GrayscaleTransformationArgs(this.getTransformationShapeArgs());
 			case SEPIA:
-				return new SepiaTransformationArgs(this.getTransformationShapeArgs());
+				return new GenericTransformationArgs(this.getTransformationShapeArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -130,7 +128,7 @@ public class AppArgs {
 			case GRAYSCALE:
 				return new GrayscaleTransformation((GrayscaleTransformationArgs) getTransformationArgs());
 			case SEPIA:
-				return new SepiaTransformation((SepiaTransformationArgs) getTransformationArgs());
+				return new SepiaTransformation((GenericTransformationArgs) getTransformationArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}

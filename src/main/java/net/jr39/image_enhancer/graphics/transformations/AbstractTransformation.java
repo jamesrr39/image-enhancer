@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author james
  * @param <T>
  */
-public abstract class AbstractTransformation<T extends AbstractTransformationArgs> {
+public abstract class AbstractTransformation<T extends GenericTransformationArgs> {
 	
 	private static final Logger LOGGER = Logger.getLogger(AbstractTransformation.class.getName());
 

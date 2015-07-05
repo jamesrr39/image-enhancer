@@ -9,9 +9,9 @@ import net.jr39.image_enhancer.graphics.filters.colour_filters.ColourUtils;
  *
  * @author james
  */
-public class SepiaTransformation extends AbstractTransformation<SepiaTransformationArgs>{
+public class SepiaTransformation extends AbstractTransformation<GenericTransformationArgs>{
 
-	public SepiaTransformation(SepiaTransformationArgs transformationArgs) {
+	public SepiaTransformation(GenericTransformationArgs transformationArgs) {
 		super(transformationArgs);
 	}
 

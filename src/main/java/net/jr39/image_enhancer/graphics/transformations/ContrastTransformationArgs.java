@@ -6,7 +6,7 @@ import net.jr39.image_enhancer.shapes.args.IShapeArgs;
  *
  * @author james
  */
-public class ContrastTransformationArgs extends AbstractTransformationArgs {
+public class ContrastTransformationArgs extends GenericTransformationArgs {
 
 	private final float factor;
 

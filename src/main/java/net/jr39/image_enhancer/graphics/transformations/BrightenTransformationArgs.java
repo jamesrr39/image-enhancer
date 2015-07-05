@@ -6,7 +6,7 @@ import net.jr39.image_enhancer.shapes.args.IShapeArgs;
  *
  * @author james
  */
-public class BrightenTransformationArgs extends AbstractTransformationArgs {
+public class BrightenTransformationArgs extends GenericTransformationArgs {
 
 	private final float scaleFactor;
 
