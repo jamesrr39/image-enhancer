@@ -4,13 +4,12 @@
 	<parent>
 		<groupId>net.jr39.image-enhancer</groupId>
 		<artifactId>image-enhancer-parent</artifactId>
-		<relativePath>../</relativePath>
+		<relativePath>../pom.xml</relativePath>
 		<version>develop-SNAPSHOT</version>
 	</parent>
 
 	<groupId>net.jr39.image-enhancer</groupId>
 	<artifactId>transformation-platform</artifactId>
-	<version>develop-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Transformation Platform</name>
