@@ -8,7 +8,7 @@
 	<artifactId>image-enhancer-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>develop-SNAPSHOT</version>
-	<name>Parent project</name>
+	<name>Image Enhancer Parent</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
