@@ -14,23 +14,5 @@
 
 	<name>Transformation Platform</name>
 	<url>http://jr39.net</url>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>java</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>net.jr39.image_enhancer.ImageEnhancer</mainClass>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

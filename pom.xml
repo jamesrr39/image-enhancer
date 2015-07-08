@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>transformation-platform</module>
+		<module>cli-app</module>
 	</modules>
 
 	<build>
