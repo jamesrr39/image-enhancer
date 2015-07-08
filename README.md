@@ -14,3 +14,7 @@ Command line app/library to perform image transformations
 ## Run
 
 This is a parent project; see [CLI App](cli-app/README.md)
+
+## Package
+
+    mvn package

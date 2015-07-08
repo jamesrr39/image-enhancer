@@ -6,9 +6,14 @@ See [parent project readme](../README.md)
 
 
 ## Run ##
-For now, we can use the mvn exec plugin, passing our args with the `-Dexec.args` argument. For example:
+You can choose between using the mvn exec plugin, passing our args with the `-Dexec.args` argument. For example:
 
     mvn exec:java -Dexec.args="-image=/home/user/Pictures/myImage.jpg -tt=brighten -ta=1.2"
+
+Or, you can package the app using `mvn package` and use it as a standalone app. You need to pass the main class of `net.jr39.image_enhancer.ImageEnhancer`
+Example usage:
+
+    java -cp cli-app/target/cli-app-develop-SNAPSHOT.jar net.jr39.image_enhancer.ImageEnhancer -image=/home/user/Pictures/myImage.jpg -tt=brighten -ta=1.2
 
 ## Options ##
 
