@@ -6,7 +6,7 @@ See [parent project readme](../README.md)
 
 
 ## Run ##
-You can choose between using the mvn exec plugin, passing our args with the `-Dexec.args` argument. For example:
+You can choose between using the mvn exec plugin, passing our args with the `-Dexec.args` argument, for example:
 
     mvn exec:java -Dexec.args="-image=/home/user/Pictures/myImage.jpg -tt=brighten -ta=1.2"
 
@@ -14,6 +14,8 @@ Or, you can package the app using `mvn package` and use it as a standalone app. 
 Example usage:
 
     java -cp cli-app/target/cli-app-develop-SNAPSHOT.jar net.jr39.image_enhancer.ImageEnhancer -image=/home/user/Pictures/myImage.jpg -tt=brighten -ta=1.2
+
+The best combination to use is to use `mvn exec:java` when developing locally, to take advantage of being able to compile modules separately (and more quickly than the whole thing) after making changes, and `mvn package` when deploying to an environment.
 
 ## Options ##
 
