@@ -14,5 +14,11 @@
 
 	<name>Transformation Platform</name>
 	<url>http://jr39.net</url>
-
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+	</dependencies>
 </project>

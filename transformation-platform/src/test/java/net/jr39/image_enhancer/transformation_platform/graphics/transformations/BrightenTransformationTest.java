@@ -9,7 +9,7 @@ import org.junit.Test;
  *
  * @author james
  */
-public class BrightenTransformationTests {
+public class BrightenTransformationTest {
 
 	@Test
 	public void testGradualBrightnessTransformation() {

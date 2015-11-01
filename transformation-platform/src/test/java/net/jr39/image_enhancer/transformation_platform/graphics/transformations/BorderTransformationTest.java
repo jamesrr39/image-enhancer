@@ -3,20 +3,16 @@ package net.jr39.image_enhancer.transformation_platform.graphics.transformations
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
-import java.util.List;
 import junit.framework.Assert;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.matchers.JUnitMatchers.everyItem;
 
 /**
  *
  * @author james
  */
-public class BorderTransformationTests {
+public class BorderTransformationTest {
 	
 	@Test
 	public void testGenerateBorder(){
