@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.jr39.image-enhancer</groupId>
+		<artifactId>image-enhancer-parent</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>develop-SNAPSHOT</version>
+	</parent>
+
+	<groupId>net.jr39.image-enhancer</groupId>
+	<artifactId>cli-app</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Image Enhancer CLI App</name>
+	<url>http://jr39.net</url>
+	<dependencies>
+		<dependency>
+			<groupId>net.jr39.image-enhancer</groupId>
+			<artifactId>transformation-platform</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>net.jr39.image_enhancer.ImageEnhancer</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

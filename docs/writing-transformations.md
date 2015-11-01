@@ -15,5 +15,5 @@ Modifications:
 
 New Files:
 
-* `YourTransformationArgs extends AbstractTransformationArgs` - any arguments you need for your transformation
+* `YourTransformationArgs extends GenericTransformationArgs` - any arguments you need for your transformation
 * `YourTransformation extends AbstractTransformation<YourTransformationArgs>` - this is where your transformation lives

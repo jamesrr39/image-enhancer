@@ -1,4 +1,6 @@
 target/
 res/
 nb-configuration.xml
-/nbactions*.xml
+nbactions*.xml
+*~
+
