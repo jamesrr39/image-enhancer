@@ -9,7 +9,7 @@ import org.junit.Test;
  *
  * @author james
  */
-public class GradualTransformationTests {
+public class GradualTransformationTest {
 	
 	@Test
 	public void testGetPixelScaleFactor() {

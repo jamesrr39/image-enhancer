@@ -1,6 +1,5 @@
 package net.jr39.image_enhancer.transformation_platform.graphics;
 
-import net.jr39.image_enhancer.transformation_platform.graphics.ImageHelper;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -11,7 +10,7 @@ import org.junit.Test;
  *
  * @author james
  */
-public class ImageHelperTests {
+public class ImageHelperTest {
 	
 	@Test
 	public void testGetImageIntArrayAtIndex(){

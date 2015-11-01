@@ -1,5 +1,7 @@
 package net.jr39.image_enhancer.transformation_platform.graphics.filters.colour_filters;
 
+import java.awt.Color;
+
 /**
  * needed static utility functions otherwise we are creating a new Color object for each pixel.
  */
@@ -38,6 +40,10 @@ public class ColourUtils {
 		final int alpha = 255;
 		return ColourUtils.getRGBInt(red, green, blue, alpha);
 
+	}
+	
+	public static Color getWhiteSmoke(){
+		return new Color(245, 245, 245);
 	}
 
 }

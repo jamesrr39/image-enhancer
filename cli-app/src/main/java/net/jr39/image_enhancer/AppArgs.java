@@ -7,6 +7,8 @@ import java.awt.Rectangle;
 import java.util.List;
 import java.util.logging.Logger;
 import net.jr39.image_enhancer.transformation_platform.graphics.transformations.AbstractTransformation;
+import net.jr39.image_enhancer.transformation_platform.graphics.transformations.BorderTransformation;
+import net.jr39.image_enhancer.transformation_platform.graphics.transformations.BorderTransformationArgs;
 import net.jr39.image_enhancer.transformation_platform.graphics.transformations.BrightenTransformation;
 import net.jr39.image_enhancer.transformation_platform.graphics.transformations.BrightenTransformationArgs;
 import net.jr39.image_enhancer.transformation_platform.graphics.transformations.ContrastTransformation;
@@ -62,6 +64,9 @@ public class AppArgs {
 			case "sepia":
 				this.transformationType = TransformationType.SEPIA;
 				break;
+			case "border":
+				this.transformationType = TransformationType.BORDER;
+				break;
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -114,6 +119,8 @@ public class AppArgs {
 				return new GrayscaleTransformationArgs(this.getTransformationShapeArgs());
 			case SEPIA:
 				return new GenericTransformationArgs(this.getTransformationShapeArgs());
+			case BORDER:
+				return new BorderTransformationArgs(this.getTransformationShapeArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}
@@ -129,6 +136,8 @@ public class AppArgs {
 				return new GrayscaleTransformation((GrayscaleTransformationArgs) getTransformationArgs());
 			case SEPIA:
 				return new SepiaTransformation((GenericTransformationArgs) getTransformationArgs());
+			case BORDER:
+				return new BorderTransformation((BorderTransformationArgs) getTransformationArgs());
 			default:
 				throw new IllegalArgumentException("The transformation type '" + transformationType + "' is not supported");
 		}

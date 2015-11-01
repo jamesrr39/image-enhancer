@@ -1,7 +1,6 @@
 
 package net.jr39.image_enhancer.transformation_platform.graphics.filters.colour_filters;
 
-import net.jr39.image_enhancer.transformation_platform.graphics.filters.colour_filters.ColourUtils;
 import java.awt.Color;
 import org.junit.Test;
 import org.junit.Assert;
