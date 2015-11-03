@@ -29,6 +29,7 @@ import org.kohsuke.args4j.spi.StringArrayOptionHandler;
 /**
  *
  * @author james
+ * @see https://github.com/jamesrr39/image-enhancer/wiki/writing-for-cli-app
  */
 public class AppArgs {
 

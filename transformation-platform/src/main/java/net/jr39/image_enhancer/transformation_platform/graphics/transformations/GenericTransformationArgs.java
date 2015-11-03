@@ -5,6 +5,8 @@ import net.jr39.image_enhancer.transformation_platform.shapes.args.IShapeArgs;
 /**
  *
  * @author james
+ * @see https://github.com/jamesrr39/image-enhancer/wiki/simple-transformation
+ * @see https://github.com/jamesrr39/image-enhancer/wiki/transformation-with-args
  */
 public class GenericTransformationArgs {
 
