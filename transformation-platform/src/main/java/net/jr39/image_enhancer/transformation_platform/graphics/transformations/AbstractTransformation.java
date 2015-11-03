@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author james
+ * @see https://github.com/jamesrr39/image-enhancer/wiki/simple-transformation
  * @param <T>
  */
 public abstract class AbstractTransformation<T extends GenericTransformationArgs> {
