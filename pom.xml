@@ -95,7 +95,6 @@
 									<exclude>log4j:log4j:jar:</exclude>
 								</excludes>
 							</artifactSet>
-							<createDependencyReducedPom>false</createDependencyReducedPom>
 						</configuration>
 					</execution>
 				</executions>
