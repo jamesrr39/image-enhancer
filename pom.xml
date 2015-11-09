@@ -20,6 +20,7 @@
 	<modules>
 		<module>transformation-platform</module>
 		<module>cli-app</module>
+	 <module>webapp/webapp</module>
 	</modules>
 
 	<build>
@@ -94,6 +95,7 @@
 									<exclude>log4j:log4j:jar:</exclude>
 								</excludes>
 							</artifactSet>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
 						</configuration>
 					</execution>
 				</executions>
