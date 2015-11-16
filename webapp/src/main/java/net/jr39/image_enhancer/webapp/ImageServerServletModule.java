@@ -15,7 +15,7 @@ public class ImageServerServletModule extends ServletModule{
 	protected void configureServlets() {
 		bind(ImageTransformationService.class).to(ImageTransformationServiceImpl.class);
 		
-		HashMap<String, String> options = new HashMap<String, String>();
+		HashMap<String, String> options = new HashMap<>();
 		options.put("com.sun.jersey.api.json.POJOMappingFeature", "true");
 		serve("/*").with(GuiceContainer.class, options);
 	}
