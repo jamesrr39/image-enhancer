@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>TODO supply a title</title>
+		<title>Image transformation webapp</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			.dropzone{
+				height: 400px;
+				width: 400px;
+				border: 1px grey dashed;
+				text-align: center;
+				font-family: sans-serif;
+				color: grey;
+			}
+		</style>
+		<script>
+			function transformImage(imageAsBase64, callback){
+				var xhr = new XMLHttpRequest();
+
+				xhr.open("POST", "http://localhost:8080/api/transform", true);
+				xhr.addEventListener("load", callback);
+				xhr.send(imageAsBase64);
+			};
+			function allowDrop(ev) {
+				ev.preventDefault();
+			}
+			function drop(ev) {
+				ev.preventDefault();
+				var file = ev.dataTransfer.files[0];
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var container = document.createElement("div"),
+							image = new Image(),
+							imagesEl = document.getElementById("images"),
+							imageAsBase64 = e.target.result;
+
+					image.src = imageAsBase64;
+					container.appendChild(image);
+					imagesEl.appendChild(container);
+					transformImage(imageAsBase64, function(xhrResponse){
+						var image = new Image();
+						
+						image.src = this.responseText;
+						container.appendChild(image);
+					});
+				};
+				reader.readAsDataURL(file);
+			}
+
+		</script>
 	</head>
 	<body>
-		<div>TODO write content</div>
+		<div>
+			<div class="dropzone" ondragover="allowDrop(event)" ondrop="drop(event)">
+				Drag an image here
+			</div>
+			<div id="images"></div>
+		</div>
 	</body>
 </html>
