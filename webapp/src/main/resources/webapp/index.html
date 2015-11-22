@@ -25,9 +25,7 @@
 			function allowDrop(ev) {
 				ev.preventDefault();
 			}
-			function drop(ev) {
-				ev.preventDefault();
-				var file = ev.dataTransfer.files[0];
+			function readImage(file){
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					var container = document.createElement("div"),
@@ -40,12 +38,20 @@
 					imagesEl.appendChild(container);
 					transformImage(imageAsBase64, function(xhrResponse){
 						var image = new Image();
-						
+
 						image.src = this.responseText;
 						container.appendChild(image);
 					});
 				};
 				reader.readAsDataURL(file);
+			}
+			
+			function drop(ev) {
+				var i;
+				ev.preventDefault();
+				for(i = 0; i < ev.dataTransfer.files.length; i++){
+					readImage(ev.dataTransfer.files[i]);
+				};
 			}
 
 		</script>
