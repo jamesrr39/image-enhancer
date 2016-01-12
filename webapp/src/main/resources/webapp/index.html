@@ -13,12 +13,16 @@
 				font-family: sans-serif;
 				color: grey;
 			}
+			img {
+				max-height: 600px;
+			}
 		</style>
 		<script>
 			function transformImage(imageAsBase64, callback){
 				var xhr = new XMLHttpRequest();
+				var transformationType = "sepia"; //todo dynamic
 
-				xhr.open("POST", "http://localhost:8080/api/transform", true);
+				xhr.open("POST", "http://localhost:8080/api/transform/" + transformationType, true);
 				xhr.addEventListener("load", callback);
 				xhr.send(imageAsBase64);
 			};
@@ -51,6 +55,12 @@
 				ev.preventDefault();
 				for(i = 0; i < ev.dataTransfer.files.length; i++){
 					readImage(ev.dataTransfer.files[i]);
+				};
+				
+				for(i = 0; i < ev.dataTransfer.items.length; i++){
+					ev.dataTransfer.items[i].getAsString(function(url){
+						readImage(url);
+					});
 				};
 			}
 

@@ -14,10 +14,10 @@ import java.util.logging.Logger;
  *
  * @author james
  * @see https://github.com/jamesrr39/image-enhancer/wiki/simple-transformation
- * @param <T>
+ * @param <T> a class extending <code>GenericTransformationArgs</code>
  */
 public abstract class AbstractTransformation<T extends GenericTransformationArgs> {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(AbstractTransformation.class.getName());
 
 	protected final T transformationArgs;
@@ -54,8 +54,7 @@ public abstract class AbstractTransformation<T extends GenericTransformationArgs
 	}
 
 	/**
-	 * Performs a transformation on the whole image by treating it as a rectangle
-	 * Can be overriden by extending classes if there is a more efficient approach
+	 * Performs a transformation on the whole image by treating it as a rectangle Can be overriden by extending classes if there is a more efficient approach
 	 *
 	 * @param image part of the image to be transformed
 	 * @return transformed image
@@ -67,11 +66,11 @@ public abstract class AbstractTransformation<T extends GenericTransformationArgs
 		return performTransformation(image, pixelsToBeTransformed, transformationCentre);
 	}
 
-	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed, Point transformationCentre){
+	protected BufferedImage performTransformation(BufferedImage image, List<Point> pixelsToBeTransformed, Point transformationCentre) {
 		int[] imagePixels = ImageHelper.getImageRGB(image);
 		final Dimension imageDimensions = new Dimension(image.getWidth(), image.getHeight());
 		pixelsToBeTransformed.forEach((point) -> {
-			if(point.getX() < 0 || point.getX() > imageDimensions.getWidth() || point.getY() < 0 || point.getY() > imageDimensions.getHeight()){
+			if (point.getX() < 0 || point.getX() > imageDimensions.getWidth() || point.getY() < 0 || point.getY() > imageDimensions.getHeight()) {
 				LOGGER.log(Level.WARNING, "Point [{0}, {1}] is out of the bounds of the image", new Object[]{
 					point.getX(),
 					point.getY()
@@ -79,20 +78,20 @@ public abstract class AbstractTransformation<T extends GenericTransformationArgs
 				return;
 			}
 			int colour = imagePixels[ImageHelper.getImageIntArrayIndex(point, imageDimensions)];
-			
+
 			// todo shape to implement transformationCentre
 			int newColour = transformationArgs.getIsGradual() ? graduallyTransformPixel(point, colour, image, transformationCentre) : transformPixel(point, colour, image);
-			
+
 			image.setRGB((int) point.getX(), (int) point.getY(), newColour);
 		});
 		return image;
 	}
-	
-	protected int graduallyTransformPixel(Point point, int colour, BufferedImage image, Point transformationCentre){
+
+	protected int graduallyTransformPixel(Point point, int colour, BufferedImage image, Point transformationCentre) {
 		LOGGER.log(Level.WARNING, "The selected transformation ''{0}'' doesn''t offer a gradual transformation, proceeding with a normal transformation", transformationArgs.getClass().getSimpleName());
 		return transformPixel(point, colour, image);
 	}
-	
+
 	protected abstract int transformPixel(Point point, int colour, BufferedImage image);
 
 }
