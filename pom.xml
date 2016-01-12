@@ -20,6 +20,7 @@
 	<modules>
 		<module>transformation-platform</module>
 		<module>cli-app</module>
+		<module>webapp</module>
 	</modules>
 
 	<build>

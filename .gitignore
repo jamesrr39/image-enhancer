@@ -4,3 +4,4 @@ nb-configuration.xml
 nbactions*.xml
 *~
 
+dependency-reduced-pom.xml
