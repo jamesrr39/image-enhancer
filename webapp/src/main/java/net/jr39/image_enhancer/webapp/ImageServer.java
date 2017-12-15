@@ -17,25 +17,24 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
  */
 public class ImageServer {
 
-	public static void main(String[] args) throws Exception {
-		Guice.createInjector(new ImageServerServletModule());
+    public static void main(String[] args) throws Exception {
+        Guice.createInjector(new ImageServerServletModule());
 
-		Server server = new Server(8080);
-		ServletContextHandler apiHandler = new ServletContextHandler(server, "/api/", ServletContextHandler.NO_SESSIONS);
-		apiHandler.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
-		apiHandler.addServlet(DefaultServlet.class, "/");
-		
-		ResourceHandler webpageHandler = new ResourceHandler();
-		webpageHandler.setResourceBase("src/main/resources/webapp");
-		webpageHandler.setServer(server);
-		
-		HandlerList serverHandler =  new HandlerList();
-		serverHandler.setHandlers(new Handler[]{webpageHandler, apiHandler});
-		
-		server.setHandler(serverHandler);
-		
-		server.start();
-		server.join();
-	}
+        Server server = new Server(8080);
+        ServletContextHandler apiHandler = new ServletContextHandler(server, "/api/", ServletContextHandler.NO_SESSIONS);
+        apiHandler.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
+        apiHandler.addServlet(DefaultServlet.class, "/");
 
+        ResourceHandler webpageHandler = new ResourceHandler();
+        webpageHandler.setResourceBase("src/main/resources/webapp");
+        webpageHandler.setServer(server);
+
+        HandlerList serverHandler = new HandlerList();
+        serverHandler.setHandlers(new Handler[]{webpageHandler, apiHandler});
+
+        server.setHandler(serverHandler);
+
+        server.start();
+        server.join();
+    }
 }

@@ -57,7 +57,7 @@ public class ImageTransformationServiceImpl implements ImageTransformationServic
 			String errorMessage = "Couldn't convert base 64 string to image";
 			Logger.getLogger(ImageTransformationServiceImpl.class.getName()).log(Level.SEVERE, errorMessage, ex);
 			return buildCORSResponse(Response.status(Response.Status.BAD_REQUEST).entity(errorMessage));
-		}
+            }
 		return Response.status(500).build();
 	}
 	
