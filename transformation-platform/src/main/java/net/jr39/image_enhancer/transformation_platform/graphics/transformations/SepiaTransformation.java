@@ -9,7 +9,7 @@ import net.jr39.image_enhancer.transformation_platform.graphics.filters.colour_f
  *
  * @author james
  */
-public class SepiaTransformation extends AbstractTransformation<GenericTransformationArgs>{
+public class SepiaTransformation extends AbstractTransformation<GenericTransformationArgs> {
 
 	public SepiaTransformation(GenericTransformationArgs transformationArgs) {
 		super(transformationArgs);
@@ -30,5 +30,5 @@ public class SepiaTransformation extends AbstractTransformation<GenericTransform
 		int blue = (int) (ColourUtils.getGreenFromRGB(colour) * MAX_BLUE_FRACTION);
 		return ColourUtils.getRGBInt(red, green, blue);
 	}
-	
+
 }

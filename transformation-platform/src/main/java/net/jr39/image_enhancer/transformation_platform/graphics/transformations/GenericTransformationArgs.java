@@ -1,5 +1,6 @@
 package net.jr39.image_enhancer.transformation_platform.graphics.transformations;
 
+import javax.annotation.Nullable;
 import net.jr39.image_enhancer.transformation_platform.shapes.args.IShapeArgs;
 
 /**
@@ -17,11 +18,11 @@ public class GenericTransformationArgs {
 		return isGradual;
 	}
 	
-	public GenericTransformationArgs(IShapeArgs shapeArgs) {
+	public GenericTransformationArgs(@Nullable IShapeArgs shapeArgs) {
 		this(shapeArgs, false);
 	}
 	
-	public GenericTransformationArgs(IShapeArgs shapeArgs, boolean isGradual) {
+	public GenericTransformationArgs(@Nullable IShapeArgs shapeArgs, boolean isGradual) {
 		this.shapeArgs = shapeArgs;
 		this.isGradual = isGradual;
 	}
